@@ -29,7 +29,6 @@ function SliderBar() {
               <label>Projetos</label>
             </a>
           </li>
-
         </ul>
       </nav>
     </aside>
