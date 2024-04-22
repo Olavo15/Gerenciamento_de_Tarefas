@@ -2,7 +2,7 @@ import { MagnifyingGlass, Bell  } from "@phosphor-icons/react";
 
 const Hearder = () => {
   return (
-    <header className="h-screen flex flex-col">
+    <header className="h-fit flex flex-col">
       <div className="w-full h-14 bg-slate-600 flex items-center justify-between p-2">
         <div className="">
           <h1 className="text-4xl">GC</h1>

@@ -1,22 +1,36 @@
-import React from 'react';
 import { House, Users, FolderPlus } from '@phosphor-icons/react'; 
 
 function SliderBar() {
   return (
-    <aside className="bg-gray-800 text-white py-4 flex-grow">
+    <aside className="bg-gray-800 px-2 py-5 text-white flex-grow w-fit h-full">
       <nav>
-        <div className="container flex flex-col p-2">
-          <House size={24} />
-          <a href="#" className="hover:text-gray-400">Home</a>
-        </div>
-        <div className="container flex flex-col p-2">
-          <Users size={24} />
-          <a href="#" className="hover:text-gray-400">Equipes</a>
-        </div>
-        <div className="container flex flex-col p-2">
-          <FolderPlus size={24} />
-          <a href="#" className="hover:text-gray-400">Projetos</a>
-        </div>
+        <ul className='flex flex-col gap-4'>
+          <li className=''>
+            <a href="/Equipes"
+              className='flex flex-col items-center justify-center group hover:bg-zinc-500 bg-opacity-50 p-2 rounded-lg hover:shadow-md transition duration-100'
+            >
+              <House size={24} />
+              <label>Home</label>
+            </a>
+          </li>
+          <li className=''>
+            <a href="/Equipes"
+              className='flex flex-col items-center justify-center group hover:bg-zinc-500 bg-opacity-50 p-2 rounded-lg hover:shadow-md transition duration-100'
+            >
+              <Users size={24} />
+              <label>Equipes</label>
+            </a>
+          </li>
+          <li className=''> 
+            <a href="/Projetos"
+              className='flex flex-col items-center justify-center group hover:bg-zinc-500 bg-opacity-50 p-2 rounded-lg hover:shadow-md transition duration-100'
+            >
+              <FolderPlus size={24} />
+              <label>Projetos</label>
+            </a>
+          </li>
+
+        </ul>
       </nav>
     </aside>
   );
