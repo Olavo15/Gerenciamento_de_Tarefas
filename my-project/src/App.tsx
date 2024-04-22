@@ -9,6 +9,8 @@ const App = () => {
         <div className="h-full">
           <SliderBar/>
         </div>
+        
+
       </div>
     </div>
   );
