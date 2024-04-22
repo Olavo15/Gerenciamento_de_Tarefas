@@ -5,7 +5,9 @@ const App = () => {
   return (
     <>
       <Header />
+      <div className="">
       <SliderBar />
+      /</div>
     </>
   );
 }
