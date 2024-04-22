@@ -20,9 +20,9 @@ const Hearder = () => {
         <div className="flex items-center">
           <Bell size={24} className="mr-4" />
           <span className="text-black mr-2">|</span>
-          <h1 className="mr-4">Avatar</h1>
+          <h1 className="mr-4">Olavo C</h1>
           <img
-            src="https://conteudo.imguol.com.br/c/entretenimento/80/2017/04/25/a-atriz-zoe-saldana-como-neytiri-em-avatar-1493136439818_v2_3x4.jpg"
+            src="https://img.freepik.com/fotos-gratis/homem-corajoso-precisando-de-uma-extracao-de-unidade-folicular_23-2149106289.jpg"
             className="rounded-full w-12 h-12 "
             alt="Descrição da imagem"
           />
