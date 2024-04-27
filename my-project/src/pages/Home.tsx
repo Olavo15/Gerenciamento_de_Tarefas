@@ -24,9 +24,9 @@ export default function Home(){
         <>
      
       <div className="flex justify-end items-center">
-          <button type="submit" className="bg-slate-200 px-1 py-1 rounded-2xl text-sm flex items-center border border-black">
+          <button type="submit" className="bg-slate-200 px-1 py-1 rounded-2xl text-l flex items-center border border-black">
               Adicionar projeto
-              <Plus size={24} className="ml-2" />
+              <Plus size={20} className="ml-2" />
           </button>
       </div>
   
