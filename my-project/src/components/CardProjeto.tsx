@@ -1,17 +1,30 @@
 interface ICardProjeto{
-    headerTitle: string;
-    description: string;
+    titulo: string;
+    status: string;
 }
 
 export default function CardProjeto(props:ICardProjeto){
+
+    function dificuldade(){
+        let _dificuldade = 'bg-green-500'
+
+        if(props.status.toLowerCase() == 'atrasado'){
+            _dificuldade = 'bg-red-500'
+        } if (props.status.toLowerCase() == 'alerta'){
+            _dificuldade = 'bg-yellow-300'
+        }
+
+        return _dificuldade
+    }
+
     return (
-        <div className="w-fit rounded-md overflow-hidden bg-zinc-200">
-            <h1 className="w-full py-2 bg-blue-400 text-sm text-center">
-                {props.headerTitle}
-            </h1>
+        <div className="max-w-30 min-w-20 rounded-md flex  gap-5 px-2 items-center justify-between overflow-hidden bg-zinc-200">
             <p className="p-2">
-                {props.description}
+                {props.titulo}
             </p>
+            <span className={`w-8 h-3 rounded-md ${dificuldade()}`}>
+    
+            </span>
         </div>
     )
 }
