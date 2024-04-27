@@ -34,7 +34,6 @@ export default function Home(){
             })}
           </Container>
 
-        
           <Container titulo="Projetos recentes" corTitulo={'bg-blue-300'}>
             {cards2.map((item) => {
               return <CardProjeto titulo={item.titulo} status={item.status}/>
