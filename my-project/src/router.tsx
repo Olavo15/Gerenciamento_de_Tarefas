@@ -2,6 +2,7 @@ import {createBrowserRouter} from 'react-router-dom'
 import Home from './pages/Home'
 import Layout from './pages/Layout/Layout'
 import PagNotFund from './pages/PagNotFund'
+import Equipes from './pages/Equipes'
 
 
 export const Router = createBrowserRouter([
@@ -24,7 +25,13 @@ export const Router = createBrowserRouter([
             },
             {
                 path:'equipes',
-                element: <div>equipes</div>
+                element: <Equipes/>,
+                children:[
+                    {
+                        path: ':id',
+                        element: <div>projeto</div>
+                    }
+                ]
             },
             {
                 path:'projetos',
