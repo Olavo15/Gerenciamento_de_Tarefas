@@ -1,5 +1,6 @@
 import CardProjeto from "../components/CardProjeto"
 import Container from "../components/Container"
+import {Plus} from "@phosphor-icons/react";
 
 const cards = [
     {titulo:"php", status:""},
@@ -21,6 +22,16 @@ const cards = [
 export default function Home(){
     return (
         <>
+     
+      <div className="flex justify-end items-center">
+          <button type="submit" className="bg-slate-200 px-2 py-2 rounded-2xl text-xl flex items-center border border-black">
+              Adicionar projeto
+              <Plus size={24} className="ml-2" />
+          </button>
+      </div>
+  
+
+
             <Container titulo="Projetos recentes" corTitulo={'bg-red-300'}>
             {cards.map((card) => {
               return <CardProjeto titulo={card.titulo} status={card.status}/>

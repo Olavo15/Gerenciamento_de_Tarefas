@@ -6,7 +6,7 @@ function SliderBar() {
       <nav>
         <ul className='flex flex-col gap-4'>
           <li className=''>
-            <a href="/Equipes"
+            <a href="/"
               className='flex flex-col items-center justify-center group hover:bg-zinc-500 bg-opacity-50 p-2 rounded-lg hover:shadow-md transition duration-100'
             >
               <House size={24} />
