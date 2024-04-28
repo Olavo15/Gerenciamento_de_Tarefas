@@ -13,9 +13,9 @@ export default function Login(){
                     <input type="password" className="flex-1 bg-transparent" placeholder="Insira sua senha" />
                     <Password/>
                 </div>
-                <button className="w-full px-2 py-1 text-center text-white bg-black rounded-md">
+                <a href="/" className="w-full px-2 py-1 text-center text-white bg-black rounded-md">
                     Entrar
-                </button>
+                </a>
                 <div className="flex items-center justify-between w-full">
                     <a href="/Recuperacao">
                         Esqueceu a senha?
