@@ -14,7 +14,8 @@ export default function Login(){
                     <Password/>
                 </div>
                 <a href="/" className="w-full px-2 py-1 text-center text-white bg-black rounded-md">
-                    Entrar
+                   <button>Entrar
+                    </button> 
                 </a>
                 <div className="flex items-center justify-between w-full">
                     <a href="/Recuperacao">
