@@ -17,7 +17,7 @@ export default function Login(){
                     Entrar
                 </button>
                 <div className="flex items-center justify-between w-full">
-                    <a href="">
+                    <a href="/Recuperacao">
                         Esqueceu a senha?
                     </a>
                     <a href="/cadastro">

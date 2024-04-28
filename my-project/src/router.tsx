@@ -4,6 +4,7 @@ import Layout from './pages/Layout/Layout'
 import PagNotFund from './pages/PagNotFund'
 import Login from './pages/Login'
 import Cadastro from './pages/Cadastro'
+import Recuperacao from './pages/Recuperacao'
 
 
 export const Router = createBrowserRouter([
@@ -14,6 +15,10 @@ export const Router = createBrowserRouter([
     {
         path:'/cadastro',
         element: <Cadastro/>
+    },
+    {
+        path:'/recuperacao',
+        element: <Recuperacao/>
     },
     {
         path: '/',
