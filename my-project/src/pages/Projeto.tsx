@@ -4,9 +4,9 @@ import { Plus, UsersThree, DotsThreeVertical } from "@phosphor-icons/react";
 export default function Projeto() {
     // Inicializando uma lista de projetos com useState
     const [projects, setProjects] = useState([
-        { id: 1, name: "Nome do projeto 1", description: "Descrição do projeto 1", imageUrl: "https://c4.wallpaperflare.com/wallpaper/936/167/698/anime-one-piece-monkey-d-luffy-shanks-one-piece-wallpaper-preview.jpg" },
-        { id: 2, name: "Nome do projeto 2", description: "Descrição do projeto 2", imageUrl: "https://img.goodfon.com/wallpaper/nbig/4/ad/one-piece-luffy-shanks.webp" },
-        { id: 3, name: "Nome do projeto 3", description: "Descrição do projeto 3", imageUrl: "https://c4.wallpaperflare.com/wallpaper/734/824/1024/thousand-sunny-one-piece-wallpaper-preview.jpg" }
+        { id: 1, name: "PHP", description: "Fazer uma aplicação de back com front", imageUrl: "https://c4.wallpaperflare.com/wallpaper/936/167/698/anime-one-piece-monkey-d-luffy-shanks-one-piece-wallpaper-preview.jpg" },
+        { id: 2, name: "BD", description: "Fazer um video", imageUrl: "https://img.goodfon.com/wallpaper/nbig/4/ad/one-piece-luffy-shanks.webp" },
+        { id: 3, name: "Pi", description: "Bla Bla Bla Bla Bla Bla", imageUrl: "https://c4.wallpaperflare.com/wallpaper/734/824/1024/thousand-sunny-one-piece-wallpaper-preview.jpg" }
     ]);
 
     // Para controlar se o menu está aberto ou fechado
@@ -60,8 +60,8 @@ const handleExit = () => {
             </div>
             <div className="flex mt-4">
                 {projects.map(project => (
-                    <div key={project.id} className="h-54 group relative w-80 border border-zinc-600 rounded-md text-pretty overflow-hidden mr-4">
-                        <button className="absolute text-black p-1 right-2 top-2 bg-white bg-opacity-50 rounded-full" onClick={() => toggleMenu(project)}>
+                    <div key={project.id} className="group relative w-80 border border-zinc-600 rounded-md text-pretty overflow-hidden mr-4">
+                        <button className="absolute text-black p-1 hidden delay-300 duration-400 group-hover:block right-2 top-2 bg-white bg-opacity-50 rounded-full" onClick={() => toggleMenu(project)}>
                             <DotsThreeVertical size={25}/>
                         </button>
                         {isMenuOpen && selectedProject.id === project.id && (
