@@ -13,7 +13,7 @@ const Hearder = () => {
             <input
               type="text"
               placeholder="Pesquisar... "
-              className="p-2 pl-10 border border-gray-300 rounded-xl"
+              className="p-2  border border-gray-300 rounded-xl"
             />
           </div>
         </div>
