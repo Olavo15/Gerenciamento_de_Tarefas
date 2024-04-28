@@ -2,18 +2,20 @@ import {createBrowserRouter} from 'react-router-dom'
 import Home from './pages/Home'
 import Layout from './pages/Layout/Layout'
 import PagNotFund from './pages/PagNotFund'
-
+import Login from './pages/Login'
+import Cadastro from './pages/Cadastro'
 
 export const Router = createBrowserRouter([
     {
         path:'/login',
-        element: <div>login</div>
+        element: <Login/>
     },
     {
         path:'/cadastro',
-        element: <div>Cadastro</div>
+        element: <Cadastro/>
     },
     {
+
         path: '/',
         element: <Layout/>,
         errorElement:<PagNotFund/>,
