@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import Layout from './pages/Layout/Layout'
 import PagNotFund from './pages/PagNotFund'
 import Login from './pages/Login'
+import Cadastro from './pages/Cadastro'
 
 
 export const Router = createBrowserRouter([
@@ -12,7 +13,7 @@ export const Router = createBrowserRouter([
     },
     {
         path:'/cadastro',
-        element: <div>Cadastro</div>
+        element: <Cadastro/>
     },
     {
         path: '/',
