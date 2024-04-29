@@ -53,7 +53,7 @@ const handleExit = () => {
     return (
         <>
             <div className="flex justify-between px-2 py-10">
-                <h1 className="text-3xl">Projeto</h1>
+                <h1 className="text-3xl">Projetos</h1>
                 <button type="submit" className="bg-slate-200 px-1 py-1 rounded-2xl text-sm flex items-center border border-black hover:bg-blue-600">
                     Adicionar projeto
                     <Plus size={24} className="ml-2" />
@@ -93,5 +93,5 @@ const handleExit = () => {
                 </div>
             </a>
         </>
-    );
+    )
 }
