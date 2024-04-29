@@ -1,8 +1,14 @@
 import { CrownSimple, DotsThree, FlagPennant, UsersThree } from "@phosphor-icons/react";
+import { useState } from "react";
+import ModalEquipeForm from "../modal/ModalEquipeForm";
 
 export default function Equipes(){
+    const [modal, setModal] = useState(false)
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2 ">
+            {
+                modal ? <ModalEquipeForm openModal={() => setModal(!modal)}/> : null
+            }
             <h1 className="text-2xl font-semibold">
                 Equipes
             </h1>
@@ -26,7 +32,7 @@ export default function Equipes(){
                         </li>
                     </ul>
                 </nav>
-                <button className="px-3 py-1 border border-zinc-500 rounded-md">
+                <button onClick={() => setModal(!modal)} className="px-3 py-1 border border-zinc-500 rounded-md">
                     Criar Equipe
                 </button>
             </div>
@@ -59,7 +65,7 @@ export default function Equipes(){
                                 </p>
                             </li>
                             <li>
-                                <button className="w-full text-center py-1 rounded-md bg-blue-400">
+                                <button onClick={() => setModal(!modal)} className="w-full text-center py-1 rounded-md bg-blue-400">
                                     Adicionar Mebro
                                 </button>
                             </li>
