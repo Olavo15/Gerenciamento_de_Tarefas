@@ -33,3 +33,44 @@ const Hearder = () => {
 }
 
 export default Hearder;
+
+
+interface IProgressCoun{
+  posicao: number;
+  quantidade: number;
+}
+
+
+export function ProgressCoun(props: IProgressCoun){
+
+
+
+  let renderList = []
+
+  for(let i = 0 ; i <= props.quantidade ; i++){
+      renderList.push(i)
+  }
+
+  return (
+      <ul className="flex items-center">
+          {
+              renderList.map((_, index) => {
+                  return (
+                      <li>
+                          {
+                              index % 2 == 0 ? (
+                                  <hr className="border w-10 border-green-400" />
+                              ) : (
+                                  index + 1
+                              )
+                              
+                          }
+                      </li>
+                  )
+              })
+          }
+          
+      </ul>
+  )
+}
+

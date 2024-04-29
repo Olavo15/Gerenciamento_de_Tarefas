@@ -3,16 +3,24 @@ import Home from './pages/Home'
 import Layout from './pages/Layout/Layout'
 import PagNotFund from './pages/PagNotFund'
 import Equipes from './pages/Equipes'
+import Cadastro from './pages/Cadastro'
+import Recuperacao from './pages/Recuperacao'
+import Login from './pages/Login'
+
 
 
 export const Router = createBrowserRouter([
     {
         path:'/login',
-        element: <div>login</div>
+        element: <Login/>
     },
     {
         path:'/cadastro',
-        element: <div>Cadastro</div>
+        element: <Cadastro/>
+    },
+    {
+        path:'/recuperacao',
+        element: <Recuperacao/>
     },
     {
         path: '/',

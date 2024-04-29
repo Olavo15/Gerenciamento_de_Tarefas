@@ -2,6 +2,9 @@ import { Trash, X } from "@phosphor-icons/react";
 import { useState } from "react";
 import { listBanner } from "../assets/listBanner";
 import { simulationUsers } from "../util/simulationUsers";
+import Input from "../components/util/Input";
+import Button from "../components/util/Button";
+import { ProgressCoun } from "../components/ProgressCount";
 
 interface IModalEquipeFormProps{
     openModal: () => void;
@@ -68,20 +71,15 @@ export default function ModalEquipeForm(props: IModalEquipeFormProps){
     function nome(){
         return (
             <>
-                <h1 className="font-semibold text-2xl">
-                    Nome da Equipe
-                </h1>
-                <input type="text" 
-                onChange={
-                    (e:React.ChangeEvent<HTMLInputElement>) => setForm({
-                        ...form 
-                        ,nomeEquipe: e.target.value
-                        }
-                    )
-                } 
-                value={form.nomeEquipe} 
-                placeholder="" 
-                className="border w-[80%] px-2 py-1 rounded-md border-zinc-500 mb-3" />
+                <Input 
+                  onChange={(e) => setForm({...form,nomeEquipe: e.target.value})}
+                  type={'text'}
+                  value={form.nomeEquipe}
+                  label="Nome da Equipe"
+                  placeholder=""
+                  styleCustom=""
+                  onClick={() => false}
+                />
             </>
         )
     }
@@ -106,17 +104,14 @@ export default function ModalEquipeForm(props: IModalEquipeFormProps){
 
         return (
             <div className="w-full h-full">
-                <label className="">
-                    Convida usuário
-                </label>
-                <input type="text" 
-                onChange={
-                    (e:React.ChangeEvent<HTMLInputElement>) => setInputSearchUser(e.target.value)
-                } 
-                value={inputSearchUser} 
-                placeholder="" 
-                className="border w-[80%] px-2 py-1 rounded-md border-zinc-500 mb-3" 
-                onClick={() => false}
+                <Input 
+                  onChange={(e) => setInputSearchUser(e.target.value)}
+                  type={'text'}
+                  value={inputSearchUser}
+                  label="Convida usuário"
+                  placeholder=""
+                  styleCustom=""
+                  onClick={() => false}
                 />
                 <div className="relative">
                 {
@@ -198,37 +193,11 @@ export default function ModalEquipeForm(props: IModalEquipeFormProps){
                 <button onClick={props.openModal} className="absolute right-2 top-2">
                     <X size={30}/>
                 </button>
-                <h1>
+
+                <h1 className="font-semibold text-2xl pb-2">
                     Cirando Equipe
                 </h1>
-                {countStage}
-                <ul className="flex items-center">
-                    <li>
-                        <hr className="border w-10 border-green-400" />
-                    </li>
-                    <li className="rounded-full border-dashed border border-zinc-300 w-8 h-8 flex items-center justify-center">
-                        1
-                    </li>
-                    <li>
-                        <hr className={`border w-10  ${countStage > 0 ? 'border-green-400' : ''}`}/>
-                    </li>
-                    <li className="rounded-full border-dashed border border-zinc-300 w-8 h-8 flex items-center justify-center">
-                        2
-                    </li>
-                    <li>
-                        <hr className={`border w-10  ${countStage > 1 ? 'border-green-400' : ''}`}/>
-                    </li>
-
-                    <li className="rounded-full border-dashed border border-zinc-300 w-8 h-8 flex items-center justify-center">
-                        3
-                    </li>
-                    <li>
-                        <hr className={`border w-10  ${countStage > 2 ? 'border-green-400' : ''}`}/>
-                    </li>
-                    <li className="rounded-md border-dashed border border-zinc-300 px-2 h-8 flex items-center justify-center">
-                        finalizar
-                    </li>
-                </ul>
+                <ProgressCoun posicao={countStage} quantidade={3}/>
                 <div className={`flex  gap-2 ${countStage == 1 ? 'flex-wrap mt-2 justify-center ' : 'flex-col h-full'}`}>
                     {
                         countStage == 0 ? (
@@ -241,14 +210,18 @@ export default function ModalEquipeForm(props: IModalEquipeFormProps){
                 <div className="flex items-end flex-1 justify-end gap-2">
                     {
                         countStage > 0 ? (
-                            <button onClick={() => setCountStage(countStage - 1)} className="px-2 py-1 bg-red-400 rounded-md text-lg">
-                                Voltar
-                            </button>
+                            <div>
+                                <Button cancelar  onClick={() => setCountStage(countStage - 1)} tipo="button">
+                                    Voltar
+                                </Button>
+                            </div>
                         ): null
                     }
-                    <button onClick={next} className="bottom-2 px-2 py-1 bg-green-400 rounded-md text-lg">
-                        Continuar
-                    </button>
+                    <div>
+                        <Button confirmar onClick={next} tipo="button" >
+                            Continuar
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>
