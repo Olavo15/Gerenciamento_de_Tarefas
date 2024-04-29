@@ -12,7 +12,7 @@ export default function Projeto() {
                 <nav className="flex text-base items-center justify-start px-4 gap-10 w-auto">
                     <ul>
                         <li>
-                          <label>Home</label>
+                          <label>My Board</label>
                         </li>
                     </ul>
 

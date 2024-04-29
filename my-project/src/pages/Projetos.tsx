@@ -59,7 +59,6 @@ const handleExit = () => {
                     <Plus size={24} className="ml-2" />
                 </button>
             </div>
-            <a href='/Projeto'>
                 <div  className="flex mt-4 ">
 
                     {projects.map(project => (
@@ -74,24 +73,26 @@ const handleExit = () => {
                                     <button className="block w-full px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={handleExit}>Sair</button>
                                 </div>
                             )}
-                            <figure className="md:shrink-0">
-                                <img  src={project.imageUrl} alt="" className="w-full" />
-                            </figure>
-                            <div className="p-2 flex flex-col">
-                                <div className="mb-4 flex items-center">
-                                    <p className="text-base text-gray-700 mr-2">{project.name}</p>
-                                    <UsersThree size={24} />
+                            <a href='/Projeto'>
+                                <figure className="md:shrink-0">
+                                    <img  src={project.imageUrl} alt="" className="w-full" />
+                                </figure>
+                                <div className="p-2 flex flex-col">
+                                    <div className="mb-4 flex items-center">
+                                        <p className="text-base text-gray-700 mr-2">{project.name}</p>
+                                        <UsersThree size={24} />
+                                    </div>
+                                    <p className="text-base text-gray-700 mb-2">{project.description}</p>
+                                    <div className="text-right">
+                                         <p className="text-base text-gray-700">27/04/2024</p>
+                                    </div>    
                                 </div>
-                                <p className="text-base text-gray-700 mb-2">{project.description}</p>
-                                <div className="text-right">
-                                     <p className="text-base text-gray-700">27/04/2024</p>
-                                </div>
-                            </div>
+                            </a>
                         </div>
 
                     ))}
                 </div>
-            </a>
+            
         </>
     )
 }
