@@ -14,7 +14,7 @@ export default function Container(props: IContainer){
                     {props.titulo}
                 </h1>
             </div>
-            <div className="flex gap-2 px-4 py-2">
+            <div className="flex items-center py-10 justify-evenly ">
                 {props.children}
             </div>
         </div>
