@@ -13,7 +13,8 @@ class migrationEquipeTarefa {
         $sql = "CREATE TABLE equipe_tarefa (
             id INT PRIMARY KEY,
             titulo VARCHAR(255),
-            descricao TEXT,
+            id_usuario INT,
+            FOREIGN KEY (id_usuario) REFERENCES usuario(id)
             id_tarefa INT,
             FOREIGN KEY (id_tarefa) REFERENCES tarefa(id)
         )";
