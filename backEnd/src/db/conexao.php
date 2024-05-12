@@ -2,7 +2,7 @@
 
 namespace App\db;
 
-class conexao {
+class conexao{
     private static $conexao;
 
     public static function getConexao() {

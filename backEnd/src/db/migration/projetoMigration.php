@@ -1,12 +1,12 @@
 <?php
 
-require_once __DIR__. '/../Conexao.php';
+require_once __DIR__. '/../conexao.php';
 
 class MigrationUsuario {
-    protected $conexao;
+    protected static $conexao;
 
-    public function __construct() {
-        $this->conexao = Conexao::getConexao();
+    public function __construct(){
+        self::$conexao = \App\db\conexao::getConexao(); 
     }
 
     public function migration() {
@@ -14,14 +14,13 @@ class MigrationUsuario {
             id INT PRIMARY KEY,
             titulo VARCHAR(255),
             descricao TEXT,
-            id_equipe INT,
-            FOREIGN KEY (id_equipe) REFERENCES equipe(id)
+            id_equipe INT
         )";
 
-        if ($this->conexao->query($sql) === TRUE) {
+        if (self::$conexao->query($sql) === TRUE) {
             echo "Tabela Projeto criada com sucesso!.\n";
         } else {
-            echo "Erro na criação da tabela: " . $this->conexao->error;
+            echo "Erro na criação da tabela: " . self::$conexao->error;
         }
     }
 }

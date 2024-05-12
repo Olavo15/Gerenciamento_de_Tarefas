@@ -1,21 +1,19 @@
 <?php
 
-require_once __DIR__. '/../Conexao.php';
+require_once __DIR__. '/../conexao.php';
 
 class MigrationUsuario {
     protected static $conexao;
 
-    public function __construct() {
-        self::$conexao = \App\db\conexao::getConexao();
+    public function __construct(){
+        self::$conexao = \App\db\conexao::getConexao(); 
     }
 
     public function migration() {
         $sql = "CREATE TABLE tarefa (
-            id INT PRIMARY KEY,
+            id VARCHAR(255) PRIMARY KEY,
             titulo VARCHAR(255),
-            descricao TEXT,
-            id_equipe INT,
-            FOREIGN KEY (id_equipe) REFERENCES Equipe(id)
+            descricao TEXT
         )";
 
         if (self::$conexao->query($sql) === TRUE) {

@@ -11,6 +11,8 @@ ModelRouter::post('/token', 'testController@tokenJWT');
 
 ModelRouter::post('/login', 'UsuarioController@login');
 ModelRouter::post('/create', 'UsuarioController@create');
+ModelRouter::get('/oi', 'testController@test');
+
 
 
 

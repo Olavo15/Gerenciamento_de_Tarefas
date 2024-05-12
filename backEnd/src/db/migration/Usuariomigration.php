@@ -1,10 +1,12 @@
 <?php
 
+require_once __DIR__. '/../conexao.php';
+
 class MigrationUsuario {
     protected static $conexao;
 
     public function __construct(){
-        self::$conexao = \App\db\conexao::getConexao();
+        self::$conexao = \App\db\conexao::getConexao(); 
     }
 
     public function migration() {
@@ -26,4 +28,3 @@ class MigrationUsuario {
 $migrationUsuario = new MigrationUsuario();
 $migrationUsuario->migration();
 
-?>

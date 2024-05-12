@@ -10,7 +10,7 @@ class UsuarioModel{
         self::$conexao = \App\db\conexao::getConexao();
     }
 
-    public function create($senha,$nome,$email) {
+    public function create($nome,$senha,$email) {
         $sql_verificar_email = "SELECT id FROM usuario WHERE email = ?";
         $stmt_verificar_email = self::$conexao->prepare($sql_verificar_email);
         $stmt_verificar_email->bind_param("s", $email);
