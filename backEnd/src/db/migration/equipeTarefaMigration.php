@@ -1,12 +1,12 @@
 <?php
 
-require_once __DIR__. '/../conexao.php';
+require_once __DIR__ . '/../conexao.php';
 
-class migrationEquipeTarefa {
+class MigrationEquipeTarefa {
     protected static $conexao;
 
     public function __construct(){
-        self::$conexao = \App\db\conexao::getConexao(); 
+        self::$conexao = \App\db\Conexao::getConexao(); 
     }
 
     public function migration() {
@@ -14,21 +14,20 @@ class migrationEquipeTarefa {
             id INT PRIMARY KEY,
             titulo VARCHAR(255),
             id_usuario INT,
-            FOREIGN KEY (id_usuario) REFERENCES usuario(id)
+            FOREIGN KEY (id_usuario) REFERENCES usuario(id),
             id_tarefa INT,
             FOREIGN KEY (id_tarefa) REFERENCES tarefa(id)
         )";
 
         if (self::$conexao->query($sql) === TRUE) {
-            echo "Tabela Projeto criada com sucesso!.\n";
+            echo "Tabela equipe_tarefa criada com sucesso!.\n";
         } else {
             echo "Erro na criação da tabela: " . self::$conexao->error;
         }
     }
 }
 
-
-$migrationEquipeTarefa = new migrationEquipeTarefa();
+$migrationEquipeTarefa = new MigrationEquipeTarefa();
 
 $migrationEquipeTarefa->migration();
 ?>
