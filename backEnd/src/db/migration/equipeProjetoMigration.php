@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . '/../conexao.php';
+require_once __DIR__. '/../conexao.php';
 
-class MigrationUsuario {
+class migrationEquipeTarefa {
     protected static $conexao;
 
     public function __construct(){
@@ -10,7 +10,7 @@ class MigrationUsuario {
     }
 
     public function migration() {
-        $sql = "CREATE TABLE tarefa (
+        $sql = "CREATE TABLE equipe_projeto (
             id INT PRIMARY KEY,
             titulo VARCHAR(255),
             descricao TEXT,
@@ -19,14 +19,15 @@ class MigrationUsuario {
         )";
 
         if (self::$conexao->query($sql) === TRUE) {
-            echo "Tabela tarefa criada com sucesso!.\n";
+            echo "Tabela Projeto criada com sucesso!.\n";
         } else {
             echo "Erro na criação da tabela: " . self::$conexao->error;
         }
     }
 }
 
-$migrationUsuario = new MigrationUsuario();
 
-$migrationUsuario->migration();
+$migrationEquipeTarefa = new migrationEquipeTarefa();
+
+$migrationEquipeTarefa->migration();
 ?>

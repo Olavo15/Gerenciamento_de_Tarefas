@@ -14,7 +14,8 @@ class MigrationUsuario {
             id INT PRIMARY KEY,
             titulo VARCHAR(255),
             descricao TEXT,
-            id_equipe INT
+            id_usuario INT,
+            FOREIGN KEY (id_usuario) REFERENCES usuario(id)
         )";
 
         if (self::$conexao->query($sql) === TRUE) {
