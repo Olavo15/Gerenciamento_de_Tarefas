@@ -23,7 +23,7 @@ class UsuarioModel{
 
         $senha_criptografada = password_hash($senha, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO usuario (id, nome, senha, email) VALUES (?,?, ?, ?)";
+        $sql = "INSERT INTO usuario (id, nome, senha, email) VALUES (? ,? , ?, ?)";
         $stmt = self::$conexao->prepare($sql);
         $id = uniqid();
         $stmt->bind_param("ssss",$id, $nome, $senha_criptografada, $email);
@@ -36,7 +36,7 @@ class UsuarioModel{
     }
 
     public function login($email, $senha) {
-        $sql_buscar_usuario = "SELECT id, senha, nome FROM usuario WHERE email = ?";
+        $sql_buscar_usuario = "SELECT id,nome, senha  FROM usuario WHERE email = ?";
         $stmt_buscar_usuario = self::$conexao->prepare($sql_buscar_usuario);
         $stmt_buscar_usuario->bind_param("s", $email);
         $stmt_buscar_usuario->execute();

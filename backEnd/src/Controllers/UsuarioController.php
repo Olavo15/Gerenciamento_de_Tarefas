@@ -35,7 +35,7 @@ class UsuarioController extends Usuario {
             echo json_encode(['error' => 'Por favor informe todos os campos corretamente!']);
             return;
         }
-
+        
         $nome = $body['nome'];
         $senha = $body['senha'];
         $email = $body['email'];

@@ -15,7 +15,7 @@ class MigrationUsuario {
             email VARCHAR(255) NOT NULL  
           );";
         
-        if (self::$conexao->query($sql) === TRUE) { // Corrigido aqui
+        if (self::$conexao->query($sql) === TRUE) {
             echo "Tabela Usuario criada com sucesso!.\n";
         } else {
             echo "Erro na criação da tabela: " . self::$conexao->error;
