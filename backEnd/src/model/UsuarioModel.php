@@ -23,10 +23,9 @@ class UsuarioModel{
 
         $senha_criptografada = password_hash($senha, PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO usuario (id, nome, senha, email) VALUES (? ,? , ?, ?)";
+        $sql = "INSERT INTO usuario (nome, senha, email) VALUES (? , ?, ?)";
         $stmt = self::$conexao->prepare($sql);
-        $id = uniqid();
-        $stmt->bind_param("ssss",$id, $nome, $senha_criptografada, $email);
+        $stmt->bind_param("sss", $nome, $senha_criptografada, $email);
         
         if ($stmt->execute()) {
             return ['success' => 'Usuário criado com sucesso'];

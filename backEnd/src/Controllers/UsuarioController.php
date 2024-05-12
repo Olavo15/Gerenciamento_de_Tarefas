@@ -36,12 +36,12 @@ class UsuarioController extends Usuario {
             return;
         }
         
-        $nome = $body['nome'];
-        $senha = $body['senha'];
-        $email = $body['email'];
+        parent::setNome($body['nome']);
+        parent::setSenha($body['senha']);
+        parent::setEmail($body['email']);
 
         $usuarioModel = new UsuarioModel();
-        $create_result = $usuarioModel->create($nome, $senha, $email);
+        $create_result = $usuarioModel->create($this->nome, $this->senha, $this->email);
 
         if (isset($create_result['success'])) {
             http_response_code(201);
