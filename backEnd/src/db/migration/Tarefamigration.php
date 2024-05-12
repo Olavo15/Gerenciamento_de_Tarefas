@@ -3,10 +3,10 @@
 require_once __DIR__. '/../Conexao.php';
 
 class MigrationUsuario {
-    protected $conexao;
+    protected static $conexao;
 
     public function __construct() {
-        $this->conexao = Conexao::getConexao();
+        self::$conexao = \App\db\conexao::getConexao();
     }
 
     public function migration() {
@@ -18,10 +18,10 @@ class MigrationUsuario {
             FOREIGN KEY (id_equipe) REFERENCES Equipe(id)
         )";
 
-        if ($this->conexao->query($sql) === TRUE) {
+        if (self::$conexao->query($sql) === TRUE) {
             echo "Tabela ??? criada com sucesso!.\n";
         } else {
-            echo "Erro na criação da tabela: " . $this->conexao->error;
+            echo "Erro na criação da tabela: " . self::$conexao->error;
         }
     }
 }

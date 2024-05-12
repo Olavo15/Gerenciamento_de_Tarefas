@@ -2,8 +2,7 @@
 
 namespace App\Controllers;
 
-use App\http\Request\JsonRequest;
-use App\http\Response\JsonResponse;
+use \Firebase\JWT\JWT;
 
 class TestController {
 
@@ -26,5 +25,13 @@ class TestController {
         } else {
             echo "no";
         }
+    }
+
+    public function tokenJWT(){
+        $body = json_decode(file_get_contents('php://input'), true);
+        $usuario['exp'] = time() + 3600;
+        $secret_key = 'sua_chave_secreta';
+        $token = JWT::encode($body, $secret_key, 'HS256');
+        echo json_encode($token);
     }
 }

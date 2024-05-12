@@ -1,16 +1,13 @@
 <?php
 
-// olavo: "localhost", "olavo", "QnE8UA", "Passageiro"
-// ari: "localhost", "sea", "S!@sytem2024", "SEA_SYSTEM
-require_once __DIR__.('/config.php');
+namespace App\db;
 
-class Conexao{
+class conexao {
     private static $conexao;
 
-    public static function getConexao(){
-        global $db_host, $db_user, $db_password, $db_name;
-        if (!self::$conexao){
-            self::$conexao = new mysqli($db_host, $db_user, $db_password, $db_name);
+    public static function getConexao() {
+        if (!self::$conexao) {
+            self::$conexao = new \mysqli("localhost", "sea", "S!@sytem2024", "SEA_SYSTEM");
             if (self::$conexao->connect_error) {
                 die("Erro ao conectar ao banco de dados: " . self::$conexao->connect_error);
             }
@@ -18,4 +15,3 @@ class Conexao{
         return self::$conexao;
     }
 }
-?>

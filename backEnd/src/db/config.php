@@ -1,5 +1,6 @@
 <?php
 
+// olavo: "localhost", "olavo", "QnE8UA", "Passageiro"
 // ari: "localhost", "sea", "S!@sytem2024", "SEA_SYSTEM"
 
 $db_host = "localhost";
