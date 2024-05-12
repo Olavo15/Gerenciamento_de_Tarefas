@@ -2,18 +2,23 @@
 
 use App\Router\ModelRouter;
 
-ModelRouter::get('/', 'homeController@index');
-ModelRouter::get('/e', 'testController@test');
-ModelRouter::get('/e/{id}', 'testController@param');
-ModelRouter::post('/e', 'testController@body');
-ModelRouter::post('/token', 'testController@tokenJWT');
-
-
 ModelRouter::post('/login', 'UsuarioController@login');
 ModelRouter::post('/create', 'UsuarioController@create');
-ModelRouter::get('/oi', 'testController@test');
 
 
+ModelRouter::post('/projeto', 'projetoController@funcao');
+ModelRouter::get('/projeto/{id}', 'projetoController@funcao');
+ModelRouter::get('/projetos', 'projetoController@funcao');
 
+ModelRouter::get('/projetos/equipe/membros/{id}', 'equipeProjetoController@funcao'); // lista membros do projeto do id
+ModelRouter::post('/projetos/equipe/membro', 'equipeProjetoController@funcao'); // adicionar membro ao projeto 
+
+
+ModelRouter::post('/tarefa', 'tarefaController@funcao');
+ModelRouter::get('/tarefa/{id}', 'tarefaController@funcao');
+ModelRouter::get('/tarefas', 'tarefasController@funcao');
+
+ModelRouter::get('/tarefas/equipe/membros/{id}', 'equipeTarefaController@funcao'); // lista membros do Tarefa do id
+ModelRouter::post('/tarefas/equipe/membro', 'equipeTarefaController@funcao'); // adicionar membro ao Tarefa 
 
 
