@@ -5,10 +5,9 @@ use App\Router\ModelRouter;
 ModelRouter::post('/login', 'UsuarioController@login');
 ModelRouter::post('/create', 'UsuarioController@create');
 
-
 ModelRouter::post('/projeto', 'projetoController@create');
 ModelRouter::get('/projeto/{id}', 'projetoController@funcao');
-ModelRouter::get('/projetos', 'projetoController@funcao');
+ModelRouter::get('/projetos/{id}', 'projetoController@listByUserId');
 
 ModelRouter::get('/projetos/equipe/membros/{id}', 'equipeProjetoController@funcao'); // lista membros do projeto do id
 ModelRouter::post('/projetos/equipe/membro', 'equipeProjetoController@funcao'); // adicionar membro ao projeto 

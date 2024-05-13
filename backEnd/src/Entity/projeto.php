@@ -6,6 +6,7 @@ class projeto {
     public $titulo;
     public $descricao;
     // private $id_usuario;
+    protected $id;
 
     public function setTitulo($titulo) {
         if(strlen($titulo) < 1 ) {
@@ -32,5 +33,9 @@ class projeto {
             exit;
         }
         $this->descricao = $descricao;
+    }
+
+    public function setId($id){
+        $this->id = $id;
     }
 }

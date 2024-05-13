@@ -30,4 +30,22 @@ class projetoController extends projeto {
             echo json_encode(['error' => $create_result['error']]);
         }
     }
+
+    public function listByUserId($param){
+        $id = $param[0];
+
+        parent::setId($id);
+
+        $projetoModel = new ProjetoModel();
+        $create_result = $projetoModel->listUserById($this->id);
+
+        if (isset($create_result['success'])) {
+            http_response_code(201);
+            echo json_encode(['success' => $create_result['dados']]);
+        } else {
+
+            http_response_code(500);
+            echo json_encode(['error' => $create_result['error']]);
+        }
+    }
 }

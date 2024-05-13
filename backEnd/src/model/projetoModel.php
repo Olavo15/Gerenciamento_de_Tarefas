@@ -23,5 +23,25 @@ class projetoModel{
             return ['error' => 'Erro ao criar projeto'];
         }
     }
+
+    public function listUserById($id) {
+
+        $sql = "SELECT PJ.id, PJ.titulo, PJ.descricao, PJ.id_usuario as dono, EQ.id_projeto as pjTime
+        FROM projeto AS PJ
+        JOIN equipe_projeto AS EQ ON PJ.id_usuario = EQ.id_usuario
+        WHERE PJ.id_usuario = ?;
+        ";
+        $stmt = self::$conexao->prepare($sql);
+        $stmt->bind_param("s", $id);
+        $stmt->execute();
+        $resultProjetos = $stmt->get_result();
+    
+        if ($resultProjetos->num_rows == 0) {
+            $dados = $resultProjetos->fetch_all(MYSQLI_ASSOC);
+            return ['success' => 'Projeto criado com sucesso','dados',$dados];
+        } else {
+            return ['error' => 'Nenhum projeto encontrado!'];
+        }
+    }
 }
 ?>
