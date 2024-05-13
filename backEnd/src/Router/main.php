@@ -6,7 +6,7 @@ ModelRouter::post('/login', 'UsuarioController@login');
 ModelRouter::post('/create', 'UsuarioController@create');
 
 
-ModelRouter::post('/projeto', 'projetoController@funcao');
+ModelRouter::post('/projeto', 'projetoController@create');
 ModelRouter::get('/projeto/{id}', 'projetoController@funcao');
 ModelRouter::get('/projetos', 'projetoController@funcao');
 

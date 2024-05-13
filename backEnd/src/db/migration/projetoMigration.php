@@ -11,7 +11,7 @@ class MigrationUsuario {
 
     public function migration() {
         $sql = "CREATE TABLE projeto (
-            id INT PRIMARY KEY,
+            id INT PRIMARY KEY AUTO_INCREMENT,
             titulo VARCHAR(255),
             descricao TEXT,
             id_usuario INT,

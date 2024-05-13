@@ -11,7 +11,7 @@ class MigrationEquipeTarefa {
 
     public function migration() {
         $sql = "CREATE TABLE equipe_tarefa (
-            id INT PRIMARY KEY,
+            id INT PRIMARY KEY AUTO_INCREMENT,
             titulo VARCHAR(255),
             id_usuario INT,
             FOREIGN KEY (id_usuario) REFERENCES usuario(id),
