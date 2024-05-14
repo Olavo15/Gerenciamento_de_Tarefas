@@ -17,9 +17,9 @@ class projetoModel{
         $stmt = self::$conexao->prepare($sql);
         $stmt->bind_param("sss", $titulo, $descricao, $progresso);
         
-        if ($stmt->execute()) {
+        if($stmt->execute()) {
             return ['success' => 'Tarefa criado com sucesso'];
-        } else {
+        }else{
             return ['error' => 'Erro ao criar tarefa'];
         }
     }

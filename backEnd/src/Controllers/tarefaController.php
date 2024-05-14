@@ -32,21 +32,21 @@ class tarefaController extends tarefa {
         }
     }
 
-    public function listByUserId($param){
-        $id = $param[0];
+    // public function listByUserId($param){
+    //     $id = $param[0];
 
-        parent::setId($id);
+    //     parent::setId($id);
 
-        $tarefaModel = new TarefaModel();
-        $create_result = $tarefaModel->listUserById($this->id);
+    //     $projetoModel = new tarefaModel();
+    //     $create_result = $projetoModel->listUserById($this->id);
 
-        if (isset($create_result['success'])) {
-            http_response_code(201);
-            echo json_encode(['success' => $create_result['dados']]);
-        } else {
+    //     if (isset($create_result['success'])) {
+    //         http_response_code(201);
+    //         echo json_encode(['success' => $create_result['dados']]);
+    //     } else {
 
-            http_response_code(500);
-            echo json_encode(['error' => $create_result['error']]);
-        }
+    //         http_response_code(500);
+    //         echo json_encode(['error' => $create_result['error']]);
+    //     }
     }
-}
+// }

@@ -13,7 +13,7 @@ ModelRouter::get('/projetos/equipe/membros/{id}', 'equipeProjetoController@funca
 ModelRouter::post('/projetos/equipe/membro', 'equipeProjetoController@funcao'); // adicionar membro ao projeto 
 
 
-ModelRouter::post('/tarefa', 'tarefaController@funcao');
+ModelRouter::post('/tarefa', 'tarefaController@create');
 ModelRouter::get('/tarefa/{id}', 'tarefaController@funcao');
 ModelRouter::get('/tarefas', 'tarefasController@funcao');
 

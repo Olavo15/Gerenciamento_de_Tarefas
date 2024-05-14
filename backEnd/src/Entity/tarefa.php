@@ -5,7 +5,7 @@ namespace App\Entity;
 class tarefa {
     public $titulo;
     public $descricao;
-    public $progesso;
+    public $progresso;
     //private $id_usuario;
 
     public function setTitulo($titulo) {
@@ -35,9 +35,9 @@ class tarefa {
         $this->descricao = $descricao;
     }
 
-    public function setStatus($progesso){
+    public function setProgresso($progresso){
         
-        $this->progresso = $progesso;
+        $this->progresso = $progresso;
     }
 
 }
