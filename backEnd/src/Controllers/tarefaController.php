@@ -8,7 +8,7 @@ use App\model\tarefaModel;
 class tarefaController extends tarefa {
     public function create(){
         $body = json_decode(file_get_contents('php://input'), true);
-        if(!isset($body['titulo']) || !isset($body['descricao']) || !isset($body['area'])) {
+        if(!isset($body['titulo']) || !isset($body['descricao']) || !isset($body['progresso'])) {
             http_response_code(400);
             echo json_encode(['error' => 'Por favor informe todos os campos corretamente!']);
             return;
@@ -16,11 +16,11 @@ class tarefaController extends tarefa {
         
         parent::setTitulo($body['titulo']);
         parent::setDescricao($body['descricao']);
-        parent::setArea($body['area']);
+        parent::setArea($body['progresso']);
         
 
         $tarefaModel = new TarefaModel();
-        $create_result = $tarefaModel->create($this->titulo, $this->descricao, $this->area);
+        $create_result = $tarefaModel->create($this->titulo, $this->descricao, $this->progresso);
 
         if (isset($create_result['success'])) {
             http_response_code(201);
