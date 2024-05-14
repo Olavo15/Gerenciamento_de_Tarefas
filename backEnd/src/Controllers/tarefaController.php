@@ -16,7 +16,7 @@ class tarefaController extends tarefa {
         
         parent::setTitulo($body['titulo']);
         parent::setDescricao($body['descricao']);
-        parent::setArea($body['progresso']);
+        parent::setProgresso($body['progresso']);
         
 
         $tarefaModel = new TarefaModel();
