@@ -5,6 +5,7 @@ namespace App\Entity;
 class projeto {
     public $nome;
     public $area;
+    
     //protected $id_usuario;
 
     public function setNome($nome) {
