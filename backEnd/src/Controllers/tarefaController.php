@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-use App\Entity\projeto;
-use App\model\projetoModel;
+use App\Entity\tarefa;
+use App\model\tarefaModel;
 
 class tarefaController extends tarefa {
     public function create(){
