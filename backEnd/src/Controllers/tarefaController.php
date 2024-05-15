@@ -19,7 +19,7 @@ class tarefaController extends tarefa {
         parent::setProgresso($body['progresso']);
         
 
-        $tarefaModel = new TarefaModel();
+        $tarefaModel = new tarefaModel();
         $create_result = $tarefaModel->create($this->titulo, $this->descricao, $this->progresso);
 
         if (isset($create_result['success'])) {
