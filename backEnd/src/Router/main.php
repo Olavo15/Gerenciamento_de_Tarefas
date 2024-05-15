@@ -20,4 +20,4 @@ ModelRouter::get('/tarefas', 'tarefasController@funcao');
 ModelRouter::get('/tarefas/equipe/membros/{id}', 'equipeTarefaController@funcao'); // lista membros do Tarefa do id
 ModelRouter::post('/tarefas/equipe/membro', 'equipeTarefaController@funcao'); // adicionar membro ao Tarefa 
 
-
+ModelRouter::post('/equipeprojeto', 'equipeProjetoController@create');
