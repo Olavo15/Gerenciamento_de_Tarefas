@@ -22,4 +22,4 @@ ModelRouter::post('/tarefas/equipe/membro', 'equipeTarefaController@funcao'); //
 
 ModelRouter::post('/equipeprojeto', 'equipeProjetoController@create');
 
-ModelRouter::Post('/equipetarefa', 'equipeProjetoController');
+ModelRouter::Post('/equipetarefa', 'equipeTarefaController@create');

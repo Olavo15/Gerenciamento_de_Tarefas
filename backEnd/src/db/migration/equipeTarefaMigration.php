@@ -14,6 +14,7 @@ class MigrationEquipeTarefa {
             id INT PRIMARY KEY AUTO_INCREMENT,
             titulo VARCHAR(255),
             nome VARCHAR(255) NOT NULL,
+            id_usuario INT,
             FOREIGN KEY (id_usuario) REFERENCES usuario(id),
             id_tarefa INT,
             FOREIGN KEY (id_tarefa) REFERENCES tarefa(id)
