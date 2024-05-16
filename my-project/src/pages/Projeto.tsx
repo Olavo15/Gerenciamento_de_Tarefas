@@ -1,6 +1,8 @@
 import { DotsThree, PaperPlaneTilt, Plus, Rows, Trash, Users, X } from "@phosphor-icons/react";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import TarefaModal from "../components/modal/TarefaModal";
+import ModalInput from "../components/modal/ModelInput";
 
 interface Task {
     titulo: string;
@@ -22,6 +24,8 @@ export function Projeto() {
 
     const [pagEquipe, setPagEquipe] = useState(true)
     const [modalAdicionarMembroTarefa, setModalAdicionarMembroTarefa] = useState(false)
+    const [modalTarefa, setModalTarefa] = useState(false)
+    const [modalAdicionarTabela, setModalAdicionarTabela] = useState(false)
     const [tabela, setTabela] = useState<Column[]>([
         {
             id: 1,
@@ -98,83 +102,44 @@ export function Projeto() {
     };
 
 
+    function adicionarTarefa(id_coluna: number){
+         vf
+    }
+
+    const tarefax1 = {
+        titulo: "TDE - Ramon",
+        descricao: "Desenvolver um jogo da velha com arduino para ser besta na saula de aula, pos o professor vulgo ramon ficou sem saber com o que ensinar na aula e acabou fazendo isso!!",
+        equipeProjeto: [
+            {
+                id: 1,
+                nome: "usuario um",
+                email: "usuarioUm@gmail.com",
+            },
+            {
+                id: 2,
+                nome: "usuario dois",
+                email: "usuarioDois@gmail.com",
+            },
+        ],
+        equipeTarefa: [
+            {
+                id: 3,
+                nome: "usuario tres",
+                email: "usuarioTres@gmail.com",
+            },
+        ],
+    }
+
     return (
         <div className="flex flex-col gap-2 w-full h-full overflow-hidden">
-            <div className="w-screen h-screen bg-black bg-opacity-50 backdrop-blur-sm absolute left-0 top-0 z-40 flex items-center justify-center">
-                <div className="w-[70%] h-[60%] bg-white rounded-md relative">
-                    <button className="absolute -right-14 rounded-full p-2 bg-zinc-300">
-                        <X size={25}/>
-                    </button>
-                    <div className="flex w-full h-full">
-                        <div className="w-full p-2 flex flex-col">
-                            {!modalAdicionarMembroTarefa ? (
-                                <div className="flex-1">
-                                    <h1>Tarefa</h1>
-                                    <p>Descrição da tarefa</p>
-                                    <div className="bg-zinc-300 p-2 w-full flex gap-1 rounded-md">
-                                        <input className="rounded-md flex-1 px-2" type="text" name="" id="" />
-                                        <button className=" p-2 bg-white rounded-md">
-                                            <PaperPlaneTilt/>
-                                        </button>
-                                    </div>
-                                </div>
-                            ) : (
-                                <div className="flex-1 flex flex-col">
-                                    <div className="flex-1 h-full">
-                                        <h1>
-                                            Adicionar membros a tarefa
-                                        </h1>
-                                        <div>
-                                            <div>
-                                                <figure>
-                                                    <img className="w-10 h-10" src="" alt="" />
-                                                </figure>
-                                                <div>
-                                                    <h3>
-                                                        Aristoteles
-                                                    </h3>
-                                                    <span>arystotelys@gmail.com</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className="bg-zinc-300 p-2 w-full flex gap-1 rounded-md">
-                                        <input className="rounded-md flex-1 px-2 py-1" type="text" name="" id="" />
-                                    </div>
-                                </div>
-                            )}
-                            
-                        </div>
-                        <div className="w-[40%] h-full bg-zinc-200 border-l p-2">
-                            <div className="flex justify-between items-center">
-                                <h1>
-                                    Participantes
-                                </h1>
-                                <button onClick={() => setModalAdicionarMembroTarefa(!modalAdicionarMembroTarefa)}>
-                                    {!modalAdicionarMembroTarefa ? <Plus/> : <X/>}
-                                </button>
-                            </div>
-
-                            <div className="flex flex-col items-start gap-1 overflow-auto h-full pb-10">
-                                <div className="flex gap-2 bg-zinc-200 p-2 w-fit rounded-md">
-                                    <figure>
-                                        <img className="w-11 h-11 rounded-full" src="https://i.pinimg.com/564x/52/73/21/5273218998372b8652178d76163fe4d5.jpg" alt="" />
-                                    </figure>
-                                    <div className="flex flex-col">
-                                        <div className="flex gap-1 items-center">
-                                            <h1 className="font-semibold dont-lg">Aristoteles</h1>
-                                        </div>
-                                        <span className="text-sm text-zinc-600 -mt-1">arystotelys@gmail.com</span>
-                                    </div>  
-                                    <button>
-                                        <Trash/>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {
+                modalAdicionarTabela ? (
+                    <ModalInput funcao={() => null} fechar={() => setModalAdicionarTabela(!modalAdicionarTabela)} titulo="Nova tabela" />
+                ) : null
+            }
+            {
+                modalTarefa ? <TarefaModal fecharModalFunction={() => setModalTarefa(!modalTarefa)} tarefa={tarefax1} /> : null
+            }
             <h1 className="text-2xl font-semibold">
                 Projeto
             </h1>
@@ -194,7 +159,8 @@ export function Projeto() {
                     </li>
                 </ul>
                 <div>
-                    <button className="px-4 py-2 rounded-md bg-zinc-100">
+                    <button onClick={() => setModalAdicionarTabela(!modalAdicionarTabela
+                        )} className="px-4 py-2 rounded-md bg-zinc-100">
                         Criar tabela
                     </button>
                 </div>
@@ -203,16 +169,13 @@ export function Projeto() {
 
             {
                 !pagEquipe ? (
-                    <div className="flex gap-2 items-center bg-zinc-200 p-2 w-fit rounded-md">
+                    <div className="flex gap-2 items-center bg-zinc-200 px-3 py-2 w-fit rounded-md">
                         <figure>
                             <img className="w-14 h-14 rounded-full" src="https://i.pinimg.com/564x/52/73/21/5273218998372b8652178d76163fe4d5.jpg" alt="" />
                         </figure>
                         <div className="flex flex-col">
                             <div className="flex gap-1 items-center">
                                 <h1 className="font-semibold dont-lg">Aristoteles</h1>
-                                <span className="px-2 rounded-md bg-purple-500 text-sm w-fit">
-                                    Front-end
-                                </span>
                             </div>
                             <span className="text-sm text-zinc-600 -mt-1">arystotelys@gmail.com</span>
                         </div>
@@ -235,6 +198,7 @@ export function Projeto() {
                                     </div>
                                     {item.tarefa.map((task, index) => (
                                         <button 
+                                            onClick={() => setModalTarefa(!modalTarefa)}
                                             key={index}
                                             className="w-full text-left bg-zinc-300 rounded-md p-2 text-wrap relative"
                                             draggable
