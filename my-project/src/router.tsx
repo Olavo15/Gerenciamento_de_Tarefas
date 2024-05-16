@@ -8,7 +8,9 @@ import Projetos from './pages/projetos'
 import { Projeto } from './pages/Projeto'
 
 
-const user = true
+let user  = localStorage.getItem('userData') ? true : false;
+
+
 
 
 export const Router = createBrowserRouter([

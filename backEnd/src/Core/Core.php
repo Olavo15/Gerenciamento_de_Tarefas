@@ -4,7 +4,10 @@ namespace App\Core;
 
 use App\Router\ModelRouter;
 
+
+
 class Core {
+    
     public static function dispatch(array $routes){
         // Obtém o método da requisição atual
         $method = $_SERVER['REQUEST_METHOD'];
