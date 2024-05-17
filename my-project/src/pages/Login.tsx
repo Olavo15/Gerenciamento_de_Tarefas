@@ -1,6 +1,7 @@
 import { Envelope, Password } from "@phosphor-icons/react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import api from "../service/api";
+import { useHistory } from "react-router-dom";
 
 export default function Login(){
 
@@ -14,11 +15,11 @@ export default function Login(){
     function verificaCaoFormulario(){
         if(loginForm.email.length < 4){
             setError('Tem certeza que é só isso ?')
-            return
+            return false
         } 
         if(loginForm.senha.length < 4){
             setError('Tem certeza que é só isso ?')
-            return
+            return false
         } 
         setError('')
         return true
@@ -26,7 +27,7 @@ export default function Login(){
 
     async function login(e: FormEvent<HTMLFormElement>){
         e.preventDefault();
-        const isFormValid = await verificaCaoFormulario();
+        const isFormValid =  verificaCaoFormulario();
         if (isFormValid) {
             api.post('/login', loginForm)
                 .then(response => {
@@ -36,9 +37,12 @@ export default function Login(){
                         email: '',
                     });
                     setError('');
+                    localStorage.setItem('userData', JSON.stringify(response.data))
                 })
                 .catch(error => {
                     console.error('Erro ao cadastrar usuário:', error);
+                    console.log(error.response.data)
+                    setError(error.response.data.error)
                 });
         }
     }
@@ -56,10 +60,12 @@ export default function Login(){
                     <input value={loginForm.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => setLoginForm({ ...loginForm, senha: e.target.value })} type="password" className="flex-1 bg-transparent" placeholder="Insira sua senha" />
                     <Password/>
                 </div>
-                {error.length > 4 ? error : null}
-                <a href="/" className="w-full px-2 py-1 text-center text-white bg-black rounded-md">
-                    <button type="button" onClick={login}>Entrar</button>
-                </a>
+                <p className="text-red-500 font-semibold">
+                    {error.length > 4 ? error : null}
+                </p>
+                <div className="w-full px-2 py-1 text-center text-white bg-black rounded-md">
+                    <button type="button" onClick={(e) => login(e)}>Entrar</button>
+                </div>
                 <div className="flex items-center justify-between w-full">
                     <a href="/Recuperacao">
                         Esqueceu a senha?
