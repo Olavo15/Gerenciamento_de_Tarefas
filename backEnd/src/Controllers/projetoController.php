@@ -48,4 +48,21 @@ class projetoController extends projeto {
             echo json_encode(['error' => $create_result['error']]);
         }
     }
+    public function deletar() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+            if (isset($input['id'])) {
+                $id = $input['id'];
+                
+                $projetoModel = new projetoModel();
+                $resultado = $projetoModel->deletarProjetoPorId($id);
+                
+                echo json_encode($resultado);
+            } else {
+                echo json_encode(['error' => 'ID do projeto não fornecido.']);
+            }
+        } else {
+            echo json_encode(['error' => 'Método de requisição inválido.']);
+        }
+    }
 }

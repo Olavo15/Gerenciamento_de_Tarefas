@@ -23,27 +23,6 @@ class projetoModel{
             return ['error' => 'Erro ao criar projeto'];
         }
     }
-
-    public function deletar($id) {
-        
-        $sql = "DELETE FROM projeto WHERE id = ?;";
-       
-        $stmt = self::$conexao->prepare($sql);
-        if ($stmt === false) {
-            return ['error' => 'Falha ao preparar a declaração.'];
-        }
-        
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-    
-        if ($stmt->affected_rows > 0) {
-            return ['success' => 'Projeto deletado com sucesso.'];
-        } else {
-            return ['error' => 'Nenhum projeto encontrado com esse ID.'];
-        }
-    }
-    
-
     public function listUserById($id) {
 
         $sql = "SELECT PJ.id, PJ.titulo, PJ.descricao, PJ.id_usuario as dono, EQ.id_projeto as pjTime
@@ -63,5 +42,24 @@ class projetoModel{
             return ['error' => 'Nenhum projeto encontrado!'];
         }
     }
+    public function deletarProjetoPorId($id) {
+    
+        $sql = "DELETE FROM projeto WHERE id = ?;";
+       
+        $stmt = self::$conexao->prepare($sql);
+        if ($stmt === false) {
+            return ['error' => 'Falha ao preparar a declaração.'];
+        }
+        
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+    
+        if ($stmt->affected_rows > 0) {
+            return ['success' => 'Projeto deletado com sucesso.'];
+        } else {
+            return ['error' => 'Nenhum projeto encontrado com esse ID.'];
+        }
+    
+    }    
 }
 ?>

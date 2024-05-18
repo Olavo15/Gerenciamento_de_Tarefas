@@ -32,4 +32,5 @@ class equipeTarefaController extends equipeTarefa {
             echo json_encode(['error' => $create_result['error']]);
         }
     }
+    
 }
