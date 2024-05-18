@@ -24,23 +24,22 @@ class projetoModel{
         }
     }
 
-    public function deletarProjetoPorTitulo($titulo) {
+    public function deletar($id) {
         
-        $sql = "DELETE FROM projeto WHERE titulo = ?;";
-    
-        
+        $sql = "DELETE FROM projeto WHERE id = ?;";
+       
         $stmt = self::$conexao->prepare($sql);
         if ($stmt === false) {
             return ['error' => 'Falha ao preparar a declaração.'];
         }
         
-        $stmt->bind_param("s", $titulo); 
+        $stmt->bind_param("i", $id);
         $stmt->execute();
     
         if ($stmt->affected_rows > 0) {
             return ['success' => 'Projeto deletado com sucesso.'];
         } else {
-            return ['error' => 'Nenhum projeto encontrado com esse título.'];
+            return ['error' => 'Nenhum projeto encontrado com esse ID.'];
         }
     }
     
