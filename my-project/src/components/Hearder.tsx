@@ -35,7 +35,7 @@ const Hearder = () => {
           <div className={`${perfil ? 'flex' : 'hidden'} drop-shadow-lg flex-col p-2 rounded-md bg-zinc-200 items-start absolute top-9 right-0`}>
             <h1>Aristoteles</h1>
             <div className="flex gap-1 items-center">
-              <button onClick={() => localStorage.removeItem('userData')}>Desconectar</button>
+              <button onClick={() => {localStorage.removeItem('userData'), window.location.href = '/'}}>Desconectar</button>
               <SignOut/>
             </div>
           </div>

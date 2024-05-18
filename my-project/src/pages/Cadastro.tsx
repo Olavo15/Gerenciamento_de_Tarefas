@@ -54,6 +54,7 @@ export default function Cadastro() {
                         termo: false
                     });
                     setError('');
+                    window.location.href = '/'
                 })
                 .catch(error => {
                     console.error('Erro ao cadastrar usuário:', error);

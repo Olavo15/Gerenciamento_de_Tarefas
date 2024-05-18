@@ -1,7 +1,7 @@
 import { Envelope, Password } from "@phosphor-icons/react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import api from "../service/api";
-import { useHistory } from "react-router-dom";
+import { Navigate, redirect, redirectDocument } from "react-router-dom";
 
 export default function Login(){
 
@@ -38,6 +38,7 @@ export default function Login(){
                     });
                     setError('');
                     localStorage.setItem('userData', JSON.stringify(response.data))
+                    window.location.href = '/'
                 })
                 .catch(error => {
                     console.error('Erro ao cadastrar usuário:', error);
