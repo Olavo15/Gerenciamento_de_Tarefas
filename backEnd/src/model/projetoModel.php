@@ -2,7 +2,7 @@
 
 namespace App\model;
 use App\db\conexao;
-
+use App\Entity\projeto;
 
 class projetoModel{
     protected static $conexao;
@@ -23,6 +23,27 @@ class projetoModel{
             return ['error' => 'Erro ao criar projeto'];
         }
     }
+
+    public function deletarProjetoPorTitulo($titulo) {
+        
+        $sql = "DELETE FROM projeto WHERE titulo = ?;";
+    
+        
+        $stmt = self::$conexao->prepare($sql);
+        if ($stmt === false) {
+            return ['error' => 'Falha ao preparar a declaração.'];
+        }
+        
+        $stmt->bind_param("s", $titulo); 
+        $stmt->execute();
+    
+        if ($stmt->affected_rows > 0) {
+            return ['success' => 'Projeto deletado com sucesso.'];
+        } else {
+            return ['error' => 'Nenhum projeto encontrado com esse título.'];
+        }
+    }
+    
 
     public function listUserById($id) {
 

@@ -5,7 +5,7 @@ use App\Router\ModelRouter;
 ModelRouter::post('/login', 'UsuarioController@login');
 ModelRouter::post('/create', 'UsuarioController@create');
 
-ModelRouter::post('/projeto', 'projetoController@create');
+ModelRouter::post('/projeto', 'projetoController@deletarProjetoPorTitulo');
 ModelRouter::get('/projeto/{id}', 'projetoController@funcao');
 ModelRouter::get('/projetos/{id}', 'projetoController@listByUserId');
 
