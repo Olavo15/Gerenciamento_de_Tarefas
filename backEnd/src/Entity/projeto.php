@@ -13,9 +13,9 @@ class projeto {
             http_response_code(400);
             echo json_encode(['error' => 'O título deve ter pelo menos 1 caractere']);
             exit;
-        } elseif (strlen($titulo) > 14) {
+        } elseif (strlen($titulo) > 20) {
             http_response_code(400);
-            echo json_encode(['error' => 'O título não pode ter mais de 14 caracteres']);
+            echo json_encode(['error' => 'O título não pode ter mais de 20 caracteres']);
             exit;
         }
         
