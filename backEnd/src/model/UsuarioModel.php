@@ -59,7 +59,7 @@ class UsuarioModel{
             $secret_key = '244_NAO_E_CRIME';
             $token = \Firebase\JWT\JWT::encode($payload, $secret_key, 'HS256');
     
-            return ['success' => 'Login bem-sucedido', 'token' => $token];
+            return ['success' => 'Login bem-sucedido', 'token' => $payload];
         } else {
             return ['error' => 'Credenciais inválidas'];
         }

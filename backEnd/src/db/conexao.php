@@ -11,7 +11,7 @@ class conexao{
 
     public static function getConexao() {
         if (!self::$conexao) {
-            self::$conexao = new \mysqli("localhost", "olavo", "QnE8UA", "GDT");
+            self::$conexao = new \mysqli("localhost", "root", "root", "poo");
             if (self::$conexao->connect_error) {
                 die("Erro ao conectar ao banco de dados: " . self::$conexao->connect_error);
             }
