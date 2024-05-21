@@ -2,7 +2,9 @@ import { MagnifyingGlass, Bell, CaretDown, SignOut, CaretUp  } from "@phosphor-i
 import { useState } from "react";
 
 const Hearder = () => {
-
+  const localStore = localStorage.getItem('userData')
+  const {token} = JSON.parse(localStore ? localStore : '')
+  const user = token.nome
   const [perfil, setPerfil] = useState(false)
   return (
     <header className="h-fit flex flex-col">
@@ -24,21 +26,12 @@ const Hearder = () => {
         </div>
         
         <div className="flex items-center gap-1 relative">
-          <img
-            src="https://img.freepik.com/fotos-gratis/homem-corajoso-precisando-de-uma-extracao-de-unidade-folicular_23-2149106289.jpg"
-            className="rounded-full w-8 h-8 "
-            alt="Descrição da imagem"
-          />
-          <button onClick={() => setPerfil(!perfil)}>
-            {perfil ? <CaretUp size={25}/> : <CaretDown size={25}/>} 
-          </button>
-          <div className={`${perfil ? 'flex' : 'hidden'} drop-shadow-lg flex-col p-2 rounded-md bg-zinc-200 items-start absolute top-9 right-0`}>
-            <h1>Aristoteles</h1>
-            <div className="flex gap-1 items-center">
-              <button onClick={() => {localStorage.removeItem('userData'), window.location.href = '/'}}>Desconectar</button>
-              <SignOut/>
+          <p>
+            {user}
+          </p>
+          <div className="flex gap-2 items-center">
+              <button onClick={() => {localStorage.removeItem('userData'), window.location.href = '/login'}}> <SignOut size={20}/></button>
             </div>
-          </div>
         </div>
     </div>
 </header>

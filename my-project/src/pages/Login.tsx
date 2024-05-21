@@ -68,9 +68,6 @@ export default function Login(){
                     <button type="button" onClick={(e) => login(e)}>Entrar</button>
                 </div>
                 <div className="flex items-center justify-between w-full">
-                    <a href="/Recuperacao">
-                        Esqueceu a senha?
-                    </a>
                     <a href="/cadastro">
                         Registre-se
                     </a>
