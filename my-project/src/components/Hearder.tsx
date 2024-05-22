@@ -3,8 +3,8 @@ import { useState } from "react";
 
 const Hearder = () => {
   const localStore = localStorage.getItem('userData')
-  const {token} = JSON.parse(localStore ? localStore : '')
-  const user = token.nome
+  // const {token} = JSON.parse(localStore ? localStore : '')
+  // const user: string = token.nome
   const [perfil, setPerfil] = useState(false)
   return (
     <header className="h-fit flex flex-col">
@@ -27,7 +27,7 @@ const Hearder = () => {
         
         <div className="flex items-center gap-1 relative">
           <p>
-            {user}
+            {/* {user} */}
           </p>
           <div className="flex gap-2 items-center">
               <button onClick={() => {localStorage.removeItem('userData'), window.location.href = '/login'}}> <SignOut size={20}/></button>

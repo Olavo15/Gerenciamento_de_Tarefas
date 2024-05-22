@@ -1,7 +1,6 @@
 import { Envelope, Password } from "@phosphor-icons/react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import api from "../service/api";
-import { Navigate, redirect, redirectDocument } from "react-router-dom";
 
 export default function Login(){
 

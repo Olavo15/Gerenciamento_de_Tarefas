@@ -10,6 +10,8 @@ import { Projeto } from './pages/Projeto'
 
 let user  = localStorage.getItem('userData') ? true : false;
 
+console.log(user)
+
 
 
 
