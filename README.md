@@ -17,11 +17,11 @@ mais eficiente do tempo e dos recursos disponíveis, melhorando a colaboração 
 ## Layout do projeto
 
 ### Tela de projetos
-.md ![Projetos](my-project/img/Projetos.jpeg)
+ ![Projetos](my-project/img/Projetos.jpeg)
 
 ### Tela de tarefas 
 
-.md ![Tarefas](my-project/img/Tarefas.jpeg)
+ ![Tarefas](my-project/img/Tarefas.jpeg)
 
 ## Tecnologias Utilizadas
 
