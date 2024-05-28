@@ -2,7 +2,7 @@
 
 ## Sobre o projeto
 
-O seguinte projeto foi desenvolvido para a disciplina de Projeto Integrador: Programação Orientada a Objetos, 2024.1, trabalhado em equipe com alunos do curso de Análise e desenvolvimento de sistemas e Sistemas da informação, orientados pelo professor Fabrício Carneiro Costa.
+O seguinte projeto foi desenvolvido para a disciplina de Projeto Integrador: Programação Orientada a Objetos, 2024.1, trabalhado em equipe com alunos do curso de Análise e desenvolvimento de sistemas e Sistemas da informação.
 
 Necessidade solicitada por outra equipe, para que se desenvolva uma plataforma de gerenciamento de tarefas, que seja simples e intuitiva e atenda aos requisitos.
 
