@@ -30,8 +30,8 @@ use App\Router\ModelRouter;
 use App\Core\Core;
 use App\Migrations\Usuarios;
 
-$usuario = new Usuarios();
-$usuario->up();
+// $usuario = new Usuarios();
+// $usuario->up();
 
 Core::dispatch(ModelRouter::routes());
 

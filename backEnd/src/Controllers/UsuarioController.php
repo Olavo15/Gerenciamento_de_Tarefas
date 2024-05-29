@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Entity\Usuario;
-use App\model\UsuarioModel;
+use App\model\UsuariosModal;
 
 class UsuarioController extends Usuario {
     public function login(){
@@ -17,7 +17,7 @@ class UsuarioController extends Usuario {
         $email = $body['email'];
         $senha = $body['senha'];
 
-        $usuarioModel = new UsuarioModel();
+        $usuarioModel = new UsuariosModal();
         $login_result = $usuarioModel->login($email, $senha);
 
         if (isset($login_result['success'])) {
