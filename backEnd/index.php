@@ -24,9 +24,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
 require_once __DIR__."/vendor/autoload.php";
 require_once __DIR__."/src/Router/main.php";
+require_once __DIR__. '/src/config/boostrap.php';
 
 use App\Router\ModelRouter;
 use App\Core\Core;
+use App\Migrations\Usuarios;
+
+$usuario = new Usuarios();
+$usuario->up();
 
 Core::dispatch(ModelRouter::routes());
 
