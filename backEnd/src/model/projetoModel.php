@@ -4,15 +4,14 @@ namespace App\model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ProjetoModel extends Model
-{
+class ProjetoModel extends Model{
     protected $table = 'projeto';
 
-    public static function criar($titulo, $descricao)
-    {
+    public function create($titulo, $descricao, $id_usuario){
         $projeto = new ProjetoModel();
         $projeto->titulo = $titulo;
         $projeto->descricao = $descricao;
+        $projeto->id_usuario = $id_usuario;
         
         if ($projeto->save()) {
             return ['success' => 'Projeto criado com sucesso'];
@@ -21,8 +20,7 @@ class ProjetoModel extends Model
         }
     }
 
-    public static function listUserById($id)
-    {
+    public function listUserById($id){
         $projetos = ProjetoModel::where('id_usuario', $id)->get();
 
         if ($projetos->isEmpty()) {
@@ -32,8 +30,7 @@ class ProjetoModel extends Model
         }
     }
 
-    public static function deletarPorId($id)
-    {
+    public function deletarPorId($id){
         $projeto = ProjetoModel::find($id);
 
         if ($projeto) {

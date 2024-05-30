@@ -8,14 +8,14 @@ class UsuariosModal extends Model {
     protected $table = 'usuarios';
 
     public function create($nome, $senha, $email) {
-        $usuarioExistente = self::where('email', $email)->first();
+        $usuarioExistente = UsuariosModal::where('email', $email)->first();
         if ($usuarioExistente) {
             return ['error' => 'Já existe um usuário com esse email'];
         }
     
         $senhaCriptografada = password_hash($senha, PASSWORD_DEFAULT);
     
-        $novoUsuario = new self();
+        $novoUsuario = new UsuariosModal();
         $novoUsuario->nome = $nome;
         $novoUsuario->senha = $senhaCriptografada;
         $novoUsuario->email = $email;

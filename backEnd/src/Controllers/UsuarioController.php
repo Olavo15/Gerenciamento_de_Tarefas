@@ -14,11 +14,11 @@ class UsuarioController extends Usuario {
             return;
         }
         
-        $email = $body['email'];
-        $senha = $body['senha'];
+        parent::setSenha($body['senha']);
+        parent::setEmail($body['email']);
 
         $usuarioModel = new UsuariosModal();
-        $login_result = $usuarioModel->login($email, $senha);
+        $login_result = $usuarioModel->login($this->email, $this->senha);
 
         if (isset($login_result['success'])) {
             echo json_encode(['token' => $login_result['token']]);
@@ -40,7 +40,7 @@ class UsuarioController extends Usuario {
         parent::setSenha($body['senha']);
         parent::setEmail($body['email']);
 
-        $usuarioModel = new UsuarioModel();
+        $usuarioModel = new UsuariosModal();
         $create_result = $usuarioModel->create($this->nome, $this->senha, $this->email);
 
         if (isset($create_result['success'])) {

@@ -9,7 +9,7 @@ $capsule = new Capsule;
 $capsule->addConnection([
     'driver' => 'mysql',
     'host' => 'localhost',
-    'database' => 'SEA_SYSTEM',
+    'database' => 'GERENCIADOR_TAREFA',
     'username' => 'sea',
     'password' => 'S!@sytem2024',
     'charset' => 'utf8',

@@ -28,7 +28,7 @@ require_once __DIR__. '/src/config/boostrap.php';
 
 use App\Router\ModelRouter;
 use App\Core\Core;
-use App\Migrations\Usuarios;
+// use App\Migrations\Usuarios;
 
 // $usuario = new Usuarios();
 // $usuario->up();
