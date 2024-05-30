@@ -40,7 +40,7 @@ class projetoController extends projeto {
 
         if (isset($create_result['success'])) {
             http_response_code(201);
-            echo json_encode(['success' => $create_result['dados']]);
+            echo json_encode(['success' => $create_result]);
         } else {
             http_response_code(500);
             echo json_encode(['error' => $create_result['error']]);

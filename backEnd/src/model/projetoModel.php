@@ -21,12 +21,19 @@ class ProjetoModel extends Model{
     }
 
     public function listUserById($id){
-        $projetos = ProjetoModel::where('id_usuario', $id)->get();
-
-        if ($projetos->isEmpty()) {
+        $projetosDoUsuario = ProjetoModel::where('id_usuario', $id)->get();
+    
+        $projetosParticipantes = ProjetoModel::join('equipe_projeto', 'projeto.id', '=', 'equipe_projeto.id_projeto')
+                                            ->where('equipe_projeto.id_usuario', $id)
+                                            ->get();
+    
+        // Combina os resultados
+        $todosOsProjetos = $projetosDoUsuario->merge($projetosParticipantes);
+    
+        if ($todosOsProjetos->isEmpty()) {
             return ['error' => 'Nenhum projeto encontrado'];
         } else {
-            return ['success' => 'Projetos encontrados', 'projetos' => $projetos];
+            return ['success' => 'Projetos encontrados', 'projetosUsuario' => $projetosDoUsuario , 'projetosParticipando' => $projetosParticipantes];
         }
     }
 
