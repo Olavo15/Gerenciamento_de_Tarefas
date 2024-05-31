@@ -18,16 +18,14 @@ export default function FormularioProjeto(props: Iprops){
 
   function criarProjeto(e: FormEvent<HTMLFormElement>){
     e.preventDefault();
-    console.log(token)
-    console.log(inputForm)
     const id_usuario = token.id_usuario
     api.post('/projeto', { 
       titulo: inputForm.titulo, 
       descricao: inputForm.descricao, 
       id_usuario 
     }).then(response => {
-      console.log(response);
       setInputForm({ titulo: '', descricao: '' });
+      window.location.href = '/'
     }).catch(error => console.error(error));
   }
 
