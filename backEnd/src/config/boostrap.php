@@ -9,9 +9,9 @@ $capsule = new Capsule;
 $capsule->addConnection([
     'driver' => 'mysql',
     'host' => 'localhost',
-    'database' => 'GERENCIADOR_TAREFA',
-    'username' => 'sea',
-    'password' => 'S!@sytem2024',
+    'database' => 'pedro',
+    'username' => 'root',
+    'password' => '',
     'charset' => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix' => '',

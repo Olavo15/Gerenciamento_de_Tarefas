@@ -22,5 +22,5 @@ class Projeto{
     }
 }
 
-// $execute = new Projeto();
-// $execute->up();
+$execute = new Projeto();
+$execute->up();

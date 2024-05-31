@@ -20,5 +20,5 @@ class Usuarios
     }
 }
 
-// $execute = new Usuarios();
-// $execute->up(); 
+$execute = new Usuarios();
+ $execute->up(); 

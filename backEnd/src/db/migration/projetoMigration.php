@@ -1,33 +1,24 @@
 <?php
 
-require_once __DIR__. '/../conexao.php';
+namespace App\Migrations;
+require_once __DIR__. '/../config/boostrap.php';
+use Illuminate\Database\Capsule\Manager as Capsule;
 
-class MigrationUsuario {
-    protected static $conexao;
+class MigrationProjeto
+{
+    public function migration()
+    {
+        Capsule::schema()->create('projeto', function ($table) {
+            $table->increments('id');
+            $table->string('titulo', 255);
+            $table->text('descricao');
+            $table->unsignedInteger('id_usuario');
+            $table->foreign('id_usuario')->references('id')->on('usuario');
+        });
 
-    public function __construct(){
-        self::$conexao = \App\db\conexao::getConexao(); 
-    }
-
-    public function migration() {
-        $sql = "CREATE TABLE projeto (
-            id INT PRIMARY KEY AUTO_INCREMENT,
-            titulo VARCHAR(255),
-            descricao TEXT,
-            id_usuario INT,
-            FOREIGN KEY (id_usuario) REFERENCES usuario(id)
-        )";
-
-        if (self::$conexao->query($sql) === TRUE) {
-            echo "Tabela Projeto criada com sucesso!.\n";
-        } else {
-            echo "Erro na criação da tabela: " . self::$conexao->error;
-        }
+        echo "Tabela Projeto criada com sucesso!.\n";
     }
 }
 
-
-$migrationUsuario = new MigrationUsuario();
-
-$migrationUsuario->migration();
-?>
+$migrationProjeto = new MigrationProjeto();
+$migrationProjeto->migration();
