@@ -25,8 +25,8 @@ export default function FormularioProjeto(props: Iprops){
       id_usuario 
     }).then(response => {
       setInputForm({ titulo: '', descricao: '' });
-      window.location.href = '/'
     }).catch(error => console.error(error));
+
   }
 
   return (

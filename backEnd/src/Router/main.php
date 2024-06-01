@@ -4,6 +4,8 @@ use App\Router\ModelRouter;
 
 ModelRouter::post('/login', 'UsuarioController@login');
 ModelRouter::post('/create', 'UsuarioController@create');
+ModelRouter::post('/usuarios', 'UsuarioController@pesquisa');
+
 
 ModelRouter::post('/projeto', 'projetoController@create');
 ModelRouter::delete('/projeto', 'projetoController@deletar');
@@ -22,5 +24,6 @@ ModelRouter::get('/tarefas/equipe/membros/{id}', 'equipeTarefaController@funcao'
 ModelRouter::post('/tarefas/equipe/membro', 'equipeTarefaController@funcao'); // adicionar membro ao Tarefa 
 
 ModelRouter::post('/equipeprojeto', 'equipeProjetoController@create');
+ModelRouter::get('/equipeprojeto/{id}', 'equipeProjetoController@listByUserId');
 
 ModelRouter::Post('/equipetarefa', 'equipeTarefaController@create');

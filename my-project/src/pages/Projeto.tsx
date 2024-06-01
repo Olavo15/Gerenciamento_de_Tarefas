@@ -1,8 +1,10 @@
 import { DotsThree, PaperPlaneTilt, Plus, Rows, Trash, Users, X } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import TarefaModal from "../components/modal/TarefaModal";
 import ModalInput from "../components/modal/ModelInput";
+import AdicionarUsuario from "../components/modal/AdicionarUsuario";
+import api from "../service/api";
 
 interface Task {
     titulo: string;
@@ -19,13 +21,22 @@ interface Column {
     tarefa: Task[];
 }
 
+interface Imembros{
+    id: number;
+    nome:string;
+    email:string;
+    url_perfil_img: string;
+}
+
 export function Projeto() {
     const { id } = useParams<{ id: string }>();
 
     const [pagEquipe, setPagEquipe] = useState(true)
-    const [modalAdicionarMembroTarefa, setModalAdicionarMembroTarefa] = useState(false)
     const [modalTarefa, setModalTarefa] = useState(false)
     const [modalAdicionarTabela, setModalAdicionarTabela] = useState(false)
+    const [modalAdicionarUsuario, setModalAdicionarUsuario] = useState(false)
+    const [membros, setMembros] = useState<Imembros[]>([])
+
     const [tabela, setTabela] = useState<Column[]>([
         {
             id: 1,
@@ -102,9 +113,7 @@ export function Projeto() {
     };
 
 
-    function adicionarTarefa(id_coluna: number){
-         vf
-    }
+    
 
     const tarefax1 = {
         titulo: "TDE - Ramon",
@@ -130,6 +139,11 @@ export function Projeto() {
         ],
     }
 
+    useEffect(() => {
+        api.get(`/equipeprojeto/${id}`).then(response => setMembros(response.data.success))
+    }, [modalAdicionarUsuario, modalAdicionarTabela])
+
+
     return (
         <div className="flex flex-col gap-2 w-full h-full overflow-hidden">
             {
@@ -138,7 +152,12 @@ export function Projeto() {
                 ) : null
             }
             {
-                modalTarefa ? <TarefaModal fecharModalFunction={() => setModalTarefa(!modalTarefa)} tarefa={tarefax1} /> : null
+                modalTarefa ? <TarefaModal fecharModalFunction={() => setModalTarefa(!modalTarefa)} tarefa={tarefax1} /> 
+                : null
+            }
+            {
+                modalAdicionarUsuario ? <AdicionarUsuario projeto_id={id? id : ''} closeModal={() => setModalAdicionarUsuario(!modalAdicionarUsuario)}  /> 
+                : null
             }
             <h1 className="text-2xl font-semibold">
                 Projeto
@@ -159,26 +178,37 @@ export function Projeto() {
                     </li>
                 </ul>
                 <div>
-                    <button onClick={() => setModalAdicionarTabela(!modalAdicionarTabela
-                        )} className="px-4 py-2 rounded-md bg-zinc-100">
-                        Criar tabela
-                    </button>
+                    {
+                        !pagEquipe ? (
+                            <button onClick={() => setModalAdicionarUsuario(!modalAdicionarUsuario
+                                )} className="px-4 py-2 rounded-md bg-white shadow-md hover:bg-opacity-40 active:bg-opacity-00">
+                                    Adicionar membro
+                            </button>
+                        ):(
+                            <button onClick={() => setModalAdicionarTabela(!modalAdicionarTabela
+                                )} className="px-4 py-2 rounded-md bg-white shadow-md hover:bg-opacity-40 active:bg-opacity-00">
+                                Criar tabela
+                            </button>
+                        )
+                    }
                 </div>
             </div>
             <div className="h-[1px] w-full border"></div>
 
             {
                 !pagEquipe ? (
-                    <div className="flex gap-2 items-center bg-zinc-200 px-3 py-2 w-fit rounded-md">
-                        <figure>
-                            <img className="w-14 h-14 rounded-full" src="https://i.pinimg.com/564x/52/73/21/5273218998372b8652178d76163fe4d5.jpg" alt="" />
-                        </figure>
-                        <div className="flex flex-col">
-                            <div className="flex gap-1 items-center">
-                                <h1 className="font-semibold dont-lg">Aristoteles</h1>
+                    <div className="flex gap-2 flex-wrap">
+                        {membros.map(membro => (
+                            <div className="flex items-center gap-1 bg-zinc-200 px-2 py-1 rounded-md">
+                                <img className="w-10 h-10 rounded-full" src={membro.url_perfil_img} alt="" />
+                                <div className="flex flex-col">
+                                    <div className="flex gap-1 items-center">
+                                        <h1 className="font-semibold dont-lg">{membro.nome}</h1>
+                                    </div>
+                                    <span className="text-sm text-zinc-600 -mt-1">{membro.email}</span>
+                                </div>
                             </div>
-                            <span className="text-sm text-zinc-600 -mt-1">arystotelys@gmail.com</span>
-                        </div>
+                        ))}
                     </div>
                 ):(
                     <div className="flex-1 flex overflow-x-scroll">

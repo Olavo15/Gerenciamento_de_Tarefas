@@ -52,4 +52,22 @@ class UsuarioController extends Usuario {
             echo json_encode(['error' => $create_result['error']]);
         }
     }
+
+    public function pesquisa(){
+        $body = json_decode(file_get_contents('php://input'), true);
+        if(!isset($body['termo'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Por favor informe todos os campos corretamente!']);
+            return;
+        }
+        $modal = new UsuariosModal();
+        $resultPesquisa = $modal->pesquisa($body['termo']);
+        if (isset($resultPesquisa['success'])) {
+            http_response_code(201);
+            echo json_encode(['success' => $resultPesquisa['success']]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => $create_result['error']]);
+        }
+    }
 }

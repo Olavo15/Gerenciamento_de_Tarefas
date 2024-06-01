@@ -6,14 +6,15 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class MigrationEquipeTarefa
 {
-    public function migration()
+    public function up()
     {
         Capsule::schema()->create('equipe_projeto', function ($table) {
-            $table->increments('id');
+            $table->id('id');
             $table->unsignedInteger('id_usuario');
             $table->unsignedInteger('id_projeto');
             $table->foreign('id_usuario')->references('id')->on('usuario');
             $table->foreign('id_projeto')->references('id')->on('projeto');
+            $table->timestamps();
         });
 
         echo "Tabela equipe_projeto criada com sucesso!.\n";
@@ -21,5 +22,5 @@ class MigrationEquipeTarefa
 }
 
 $migrationEquipeTarefa = new MigrationEquipeTarefa();
-$migrationEquipeTarefa->migration();
+$migrationEquipeTarefa->up();
 
