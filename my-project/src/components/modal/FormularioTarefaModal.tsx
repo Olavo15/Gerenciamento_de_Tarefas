@@ -76,7 +76,7 @@ export function FormularioTarefaModal(props: Iprops) {
                 </button>
             )}
             {success.length > 0 && (
-                <button onClick={() => setSuccess('')} className="absolute p-3 flex gap-2 items-center rounded-l-md z-50 bg-green-400 shadow-md right-0 top-20">
+                <button onClick={() => setSuccess('')} className="absolute p-3 flex gap-2 items-center rounded-l-md z-50 bg-green-500 shadow-md right-0 top-20">
                     <X />
                     <h1>{success}</h1>
                 </button>
