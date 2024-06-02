@@ -9,6 +9,7 @@ interface IProjeto {
     descricao: string;
     id_usuario: number;
     created_at: string;
+    id_projeto?: number;
 }
 
 export default function Projetos() {
@@ -77,7 +78,7 @@ export default function Projetos() {
                     <h2 className='pb-2 font-semibold text-xl'>Projetos que está Participando:</h2>
                     <div className='flex gap-2 flex-wrap'>
                         {projetosParticipando.map(projeto => (
-                            <a href={`/projeto/${projeto.id}`} key={projeto.id} className='p-2 bg-white rounded-md shadow-md w-72 border-l-[4px] border-blue-400'>
+                            <a href={`/projeto/${projeto.id_projeto}`} key={projeto.id} className='p-2 bg-white rounded-md shadow-md w-72 border-l-[4px] border-blue-400'>
                                 <div className='flex gap-1 items-center justify-between'>
                                     <h3 className='font-bold'>{projeto.titulo}</h3>
                                     <p className='text-sm text-zinc-700 px-1 bg-green-200 rounded-md'>

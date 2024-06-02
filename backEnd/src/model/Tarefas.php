@@ -30,7 +30,7 @@ class Tarefas extends Model {
             return ['error' => 'Tarefa não encontrada'];
         }
 
-        $tarefa->id = $novo_id;
+        $tarefa->id_tabela_tarefa = $novo_id;
 
         if ($tarefa->save()) {
             return ['success' => 'ID da tarefa atualizado com sucesso']; 

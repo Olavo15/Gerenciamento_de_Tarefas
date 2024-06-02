@@ -41,23 +41,46 @@ export function Projeto() {
     const [tabelasTarefas, setTabelasTarefas] = useState<ITabelaTarefa[]>([])
     const [membros, setMembros] = useState<Imembros[]>([])
 
+    const [draggedTask, setDraggedTask] = useState<ITarefas | null>(null);
+    const [originColumnId, setOriginColumnId] = useState<number | null>(null);
 
 
     useEffect(() => {
         api.get(`/tabelas/${id}`).then(response => setTabelasTarefas(response.data.success))
         api.get(`/equipeprojeto/${id}`).then(response => setMembros(response.data.success))
-    }, [modalAdicionarUsuario, modalAdicionarTabela, modalAdicionarTabela, modalFormularioTarefa])
+    }, [modalAdicionarUsuario, modalAdicionarTabela, modalAdicionarTabela, modalFormularioTarefa, draggedTask, originColumnId])
 
     function novaTarefa(id_tabela: number){
         setIdTabela(id_tabela)
         setModalFormularioTarefa(!modalFormularioTarefa)
     }
 
-    function mudarTarefaColuna(idNovaColuna: number, idTarefa: number){
-        api.put('tarefa', {
+    // Função para iniciar o arrastar
+    function handleDragStart(tarefa: ITarefas, idColunaOrigem: number) {
+        setDraggedTask(tarefa);
+        setOriginColumnId(idColunaOrigem);
+    }
+
+    // Função para finalizar o arrastar
+    function handleDrop(destinationColumnId: number) {
+        if (draggedTask && originColumnId !== null && destinationColumnId !== null && originColumnId !== destinationColumnId) {
+            mudarTarefaColuna(destinationColumnId, draggedTask.id);
+        }
+        setDraggedTask(null);
+        setOriginColumnId(null);
+
+    }
+
+    function handleDragOver(event: React.DragEvent<HTMLDivElement>, idColunaDestino: number) {
+        event.preventDefault();
+    }
+
+    // Função para mover a tarefa entre colunas
+    function mudarTarefaColuna(idNovaColuna: number, idTarefa: number) {
+        api.post('/tarefa/update', {
             id_tarefa: idTarefa,
             novo_id: idNovaColuna
-        })
+        },)
     }
 
     return (
@@ -138,7 +161,8 @@ export function Projeto() {
                         {
                             tabelasTarefas.map((tabela) => {
                                 return (
-                                    <div key={tabela.id} className="w-60">
+                                    <div key={tabela.id} className="w-60 h-full" onDragOver={(e) => handleDragOver(e, tabela.id)}
+                                    onDrop={() => handleDrop(tabela.id)}>
                                         <div className={`px-2 py-1 flex gap-5 w-full justify-between ${tabela.cor} rounded-md`}>
                                             <button>
                                                 <DotsThreeVertical/>
@@ -153,7 +177,9 @@ export function Projeto() {
                                         <div className="flex flex-col gap-2 mt-2">
                                             {tabela.tarefas.map((tarefa) => {
                                                 return (
-                                                    <div key={tarefa.id} className="bg-white p-2 rounded-md shadow-md w-full">
+                                                    <div key={tarefa.id} className="bg-white p-2 rounded-md shadow-md w-full"
+                                                    draggable={true}
+                                                    onDragStart={() => handleDragStart(tarefa, tabela.id)}>
                                                         <div className="flex flex-col gap-1">
                                                             <h1 className="font-semibold">{tarefa.titulo}</h1>
                                                             <span className="text-sm text-zinc-600 break-all">{tarefa.descricao}</span>
