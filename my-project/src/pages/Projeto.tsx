@@ -31,6 +31,7 @@ interface ITabelaTarefa {
 
 export function Projeto() {
     const { id } = useParams<{ id: string }>();
+    const [idTabela, setIdTabela] = useState(0)
 
     const [pagEquipe, setPagEquipe] = useState(true)
     const [modalTarefa, setModalTarefa] = useState(false)
@@ -45,10 +46,18 @@ export function Projeto() {
     useEffect(() => {
         api.get(`/tabelas/${id}`).then(response => setTabelasTarefas(response.data.success))
         api.get(`/equipeprojeto/${id}`).then(response => setMembros(response.data.success))
-    }, [modalAdicionarUsuario, modalAdicionarTabela, modalAdicionarTabela])
+    }, [modalAdicionarUsuario, modalAdicionarTabela, modalAdicionarTabela, modalFormularioTarefa])
 
-    function novaTarefa(){
+    function novaTarefa(id_tabela: number){
+        setIdTabela(id_tabela)
+        setModalFormularioTarefa(!modalFormularioTarefa)
+    }
 
+    function mudarTarefaColuna(idNovaColuna: number, idTarefa: number){
+        api.put('tarefa', {
+            id_tarefa: idTarefa,
+            novo_id: idNovaColuna
+        })
     }
 
     return (
@@ -63,7 +72,7 @@ export function Projeto() {
                     : null
             }
             {
-                modalFormularioTarefa ? <FormularioTarefaModal closeModal={() => setModalFormularioTarefa(!modalFormularioTarefa)} /> 
+                modalFormularioTarefa ? <FormularioTarefaModal id_projeto={Number(id)} id_tabela_tarefa={idTabela} closeModal={() => setModalFormularioTarefa(!modalFormularioTarefa)} /> 
                     : null
             }
             {
@@ -129,7 +138,7 @@ export function Projeto() {
                         {
                             tabelasTarefas.map((tabela) => {
                                 return (
-                                    <div key={tabela.id} className="max-w-60">
+                                    <div key={tabela.id} className="w-60">
                                         <div className={`px-2 py-1 flex gap-5 w-full justify-between ${tabela.cor} rounded-md`}>
                                             <button>
                                                 <DotsThreeVertical/>
@@ -137,17 +146,17 @@ export function Projeto() {
                                             <h1>
                                                 {tabela.titulo}
                                             </h1>
-                                            <button onClick={() => setModalFormularioTarefa(!modalFormularioTarefa)}>
+                                            <button onClick={() => novaTarefa(tabela.id)}>
                                                 <Plus/>
                                             </button>
                                         </div>
                                         <div className="flex flex-col gap-2 mt-2">
                                             {tabela.tarefas.map((tarefa) => {
                                                 return (
-                                                    <div key={tarefa.id} className="bg-white p-2 rounded-md shadow-md">
+                                                    <div key={tarefa.id} className="bg-white p-2 rounded-md shadow-md w-full">
                                                         <div className="flex flex-col gap-1">
                                                             <h1 className="font-semibold">{tarefa.titulo}</h1>
-                                                            <span className="text-sm text-zinc-600">{tarefa.descricao}</span>
+                                                            <span className="text-sm text-zinc-600 break-all">{tarefa.descricao}</span>
                                                         </div>
                                                         <div className="flex ml-5 mt-2">
                                                             {tarefa.equipe_tarefa.map((user, index) => {
