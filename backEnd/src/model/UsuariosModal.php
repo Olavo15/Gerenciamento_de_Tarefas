@@ -8,7 +8,9 @@ class UsuariosModal extends Model {
     protected $table = 'usuarios';
 
     public function create($nome, $senha, $email) {
+
         $usuarioExistente = UsuariosModal::where('email', $email)->first();
+        
         if ($usuarioExistente) {
             return ['error' => 'Já existe um usuário com esse email'];
         }
@@ -53,8 +55,8 @@ class UsuariosModal extends Model {
 
     public function pesquisa($termo) {
         if(strlen($termo) < 2) {
-            $usuarios = UsuariosModal::take(3)
-                ->select('id', 'nome', 'email')
+            $usuarios = UsuariosModal::take()
+                ->select('id', 'nome', 'email', 'url_perfil_img')
                 ->get();
             return ['success' => $usuarios];
         } else {

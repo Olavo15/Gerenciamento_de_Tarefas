@@ -20,5 +20,5 @@ class Usuarios
     }
 }
 
-$execute = new Usuarios();
- $execute->up(); 
+// $migration = new Usuarios();
+// $migration->up();

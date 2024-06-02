@@ -1,16 +1,14 @@
 <?php
 
 namespace App\model;
-use App\db\conexao;
 
-class equipeTarefaModel{
-    protected static $conexao;
+use Illuminate\Database\Eloquent\Model;
 
-    public function __construct(){
-        self::$conexao = \App\db\conexao::getConexao();
-    }
+class equipeTarefaModel extends Model{
+    protected $table = 'equipe_tarefa';
 
     public function create($titulo, $nome, $id_usuario, $id_tarefa){
+        $tarefa = new equipeTarefaModel();
         $sql = "INSERT INTO equipe_tarefa (titulo, nome, id_usuario, id_tarefa) VALUES (?, ?, ?, ?)";
         $stmt = self::$conexao->prepare($sql);
         $stmt->bind_param("ssss", $titulo, $nome, $id_usuario, $id_tarefa);
