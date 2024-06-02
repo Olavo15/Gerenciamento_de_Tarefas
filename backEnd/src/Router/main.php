@@ -13,7 +13,7 @@ ModelRouter::get('/projetos/{id}', 'projetoController@listByUserId');
 
 
 ModelRouter::post('/tarefa', 'tarefaController@create');
-ModelRouter::get('/tarefa/{id}', 'tarefaController@funcao');
+ModelRouter::put('/tarefa', 'tarefaController@updateId');
 ModelRouter::get('/tarefas', 'tarefasController@funcao');
 
 ModelRouter::get('/tabelas/{id}', 'TabelaController@listAllTablesByProjectId');

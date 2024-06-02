@@ -32,21 +32,26 @@ class tarefaController extends tarefa {
         }
     }
 
-    // public function listByUserId($param){
-    //     $id = $param[0];
+    public function updateId() {
+        $body = json_decode(file_get_contents('php://input'), true);
 
-    //     parent::setId($id);
+        // Verificar se o corpo da solicitação contém os campos necessários
+        if(!isset($body['id_tarefa']) || !isset($body['novo_id'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Por favor, informe o ID da tarefa e o novo ID']);
+            return;
+        }
 
-    //     $projetoModel = new tarefaModel();
-    //     $create_result = $projetoModel->listUserById($this->id);
+        $tarefaModel = new Tarefas();
+        $update_result = $tarefaModel->updateId($body['id_tarefa'], $body['novo_id']);
 
-    //     if (isset($create_result['success'])) {
-    //         http_response_code(201);
-    //         echo json_encode(['success' => $create_result['dados']]);
-    //     } else {
-
-    //         http_response_code(500);
-    //         echo json_encode(['error' => $create_result['error']]);
-    //     }
+        if (isset($update_result['success'])) {
+            http_response_code(200);
+            echo json_encode(['success' => $update_result['success']]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => $update_result['error']]);
+        }
     }
-// }
+
+}

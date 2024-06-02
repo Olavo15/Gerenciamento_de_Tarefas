@@ -21,5 +21,22 @@ class Tarefas extends Model {
             return ['error' => 'Erro ao criar tarefa'];
         }
     }
+
+
+    public function updateId($id_tarefa, $novo_id) {
+        $tarefa = Tarefas::find($id_tarefa);
+
+        if (!$tarefa) {
+            return ['error' => 'Tarefa não encontrada'];
+        }
+
+        $tarefa->id = $novo_id;
+
+        if ($tarefa->save()) {
+            return ['success' => 'ID da tarefa atualizado com sucesso']; 
+        } else {
+            return ['error' => 'Erro ao atualizar ID da tarefa'];
+        }
+    }
 }
 ?>
