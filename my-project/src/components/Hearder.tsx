@@ -1,4 +1,4 @@
-import { MagnifyingGlass, Bell, CaretDown, SignOut, CaretUp  } from "@phosphor-icons/react";
+import { MagnifyingGlass, Bell, CaretDown, SignOut, CaretUp, Alien  } from "@phosphor-icons/react";
 import { useState } from "react";
 import Perfil from "./modal/Perfil";
 
