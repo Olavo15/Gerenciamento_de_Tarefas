@@ -30,12 +30,23 @@ $capsule = new Capsule;
 
 // depois de configurar procura um arquivo chamado UpMigration.php ele vai ta na raiz fora do src!!
 
+// $capsule->addConnection([
+//     'driver' => 'mysql',
+//     'host' => 'localhost',
+//     'database' => 'GERENCIADOR_TAREFA',
+//     'username' => 'sea',
+//     'password' => 'S!@sytem2024',
+//     'charset' => 'utf8',
+//     'collation' => 'utf8_unicode_ci',
+//     'prefix' => '',
+// ]);
+
 $capsule->addConnection([
     'driver' => 'mysql',
     'host' => 'localhost',
-    'database' => 'GERENCIADOR_TAREFA',
-    'username' => 'sea',
-    'password' => 'S!@sytem2024',
+    'database' => 'sea',
+    'username' => 'root',
+    'password' => '',
     'charset' => 'utf8',
     'collation' => 'utf8_unicode_ci',
     'prefix' => '',
