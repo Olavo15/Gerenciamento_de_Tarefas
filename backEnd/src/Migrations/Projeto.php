@@ -21,7 +21,3 @@ class Projeto{
         Capsule::schema()->dropIfExists('projeto');
     }
 }
-
-
-// $migration = new Projeto();
-// $migration->up();

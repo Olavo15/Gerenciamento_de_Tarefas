@@ -20,5 +20,3 @@ class Usuarios
     }
 }
 
-// $migration = new Usuarios();
-// $migration->up();

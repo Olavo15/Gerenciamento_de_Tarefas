@@ -12,8 +12,6 @@ class TarefaMigration
             $table->id();
             $table->string('titulo', 255);
             $table->string('descricao', 255);
-            $table->unsignedBigInteger('id_equipe_tarefa');
-            $table->foreign('id_equipe_tarefa')->references('id')->on('equipe_tarefa');
             $table->unsignedBigInteger('id_projeto');
             $table->foreign('id_projeto')->references('id')->on('projeto');
             $table->unsignedBigInteger('id_tabela_tarefa');
@@ -23,5 +21,3 @@ class TarefaMigration
     }
 }
 
-// $migration = new tarefaMigration();
-// $migration->up();

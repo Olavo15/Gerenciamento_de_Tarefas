@@ -10,12 +10,11 @@ class MigrationEquipeTarefa
     {
         Capsule::schema()->create('equipe_tarefa', function ($table) {
             $table->id();
+            $table->unsignedBigInteger('id_tarefa');
+            $table->foreign('id_tarefa')->references('id')->on('tarefas');
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('usuarios');
             $table->timestamps();
         });
     }
 }
-
-// $migration = new MigrationEquipeTarefa();
-// $migration->up();

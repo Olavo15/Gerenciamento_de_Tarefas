@@ -19,6 +19,3 @@ class MigrationEquipeProjeto
         });
     }
 }
-
-// $migration = new MigrationEquipeProjeto();
-// $migration->up();

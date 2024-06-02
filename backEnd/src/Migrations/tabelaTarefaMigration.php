@@ -18,7 +18,3 @@ class tabelaTarefaMigration
         });
     }
 }
-
-
-// $migration = new tabelaTarefaMigration();
-// $migration->up();
