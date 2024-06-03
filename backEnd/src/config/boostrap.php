@@ -20,9 +20,9 @@ $capsule = new Capsule;
 // $capsule->addConnection([
 //     'driver' => 'mysql',
 //     'host' => 'localhost',
-//     'database' => 'Nome do banco de dados, acho que tu colocou sea',
-//     'username' => 'Teu nome de usuario, se eu não me engano o teu é root',
-//     'password' => 'pode deixar so '' como não tem senha....',
+//     'database' => 'GDT',
+//     'username' => 'olavo',
+//     'password' => 'QnE8UA',
 //     'charset' => 'utf8',
 //     'collation' => 'utf8_unicode_ci',
 //     'prefix' => '',
