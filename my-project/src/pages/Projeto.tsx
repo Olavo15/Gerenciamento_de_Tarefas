@@ -102,19 +102,19 @@ export function Projeto() {
                 modalAdicionarUsuario ? <AdicionarUsuario projeto_id={id ? id : ''} closeModal={() => setModalAdicionarUsuario(!modalAdicionarUsuario)} />
                     : null
             }
-            <h1 className="text-2xl font-semibold">
+            <h1 className=" pb-2 font-worksans text-3xl font-semibold mt-8">
                 Projeto
             </h1>
-            <div className="w-full flex items-center justify-between">
+            <div className=" mt-4 w-full flex items-center justify-between">
                 <ul className="flex gap-3">
                     <li>
-                        <button onClick={() => setPagEquipe(true)} className={`flex items-center gap-1 ${pagEquipe ? 'font-bold' : null}`}>
+                        <button onClick={() => setPagEquipe(true)} className={` font-worksans flex items-center gap-1 ${pagEquipe ? 'font-bold' : null}`}>
                             <Rows weight={pagEquipe ? 'bold' : 'regular'} />
                             <span>Tabelas</span>
                         </button>
                     </li>
                     <li>
-                        <button onClick={() => setPagEquipe(false)} className={`flex items-center gap-1 ${!pagEquipe ? 'font-bold' : null}`}>
+                        <button onClick={() => setPagEquipe(false)} className={` ml-4 font-worksans flex items-center gap-2 ${!pagEquipe ? 'font-bold' : null}`}>
                             <Users weight={!pagEquipe ? 'bold' : 'regular'} />
                             <span>Equipe</span>
                         </button>
@@ -129,7 +129,7 @@ export function Projeto() {
                             </button>
                         ) : (
                             <button onClick={() => setModalAdicionarTabela(!modalAdicionarTabela
-                            )} className="px-4 py-2 rounded-md bg-white shadow-md hover:bg-opacity-40 active:bg-opacity-00">
+                            )} className=" bg-white font-worksans text-[17px] text-nowrap rounded-lg flex gap-1 px-6 py-[9px] shadow-md hover:border border-[#399ED7] mb-4">
                                 Criar tabela
                             </button>
                         )
@@ -163,7 +163,7 @@ export function Projeto() {
                                 return (
                                     <div key={tabela.id} className="w-60 h-full" onDragOver={(e) => handleDragOver(e, tabela.id)}
                                     onDrop={() => handleDrop(tabela.id)}>
-                                        <div className={`px-2 py-1 flex gap-5 w-full justify-between ${tabela.cor} rounded-md`}>
+                                        <div className={` mt-4 px-2 shadow py-[7px] flex gap-5 w-full justify-between ${tabela.cor} rounded-md`}>
                                             <button>
                                                 <DotsThreeVertical/>
                                             </button>

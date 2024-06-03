@@ -40,11 +40,11 @@ export default function Projetos() {
         <div>
             {abriModalFormularioProjeto ? <FormularioProjeto closeModal={() => setAbriModalFormularioProjeto(false)} /> : null}
 
-            <div className="flex justify-between items-center mt-12">
+            <div className="flex justify-between items-center mt-8">
                 <h1 className='pb-2 font-semibold text-3xl font-worksans text-[#232323]'>
                     Lista de Projetos
                 </h1>
-                <button onClick={() => setAbriModalFormularioProjeto(true)} type="submit" className=" font-worksans bg-white text-[17px] text-nowrap rounded-lg flex gap-1 px-4 py-[9px] shadow-md hover:border border-[#399ED7] mb-8">
+                <button onClick={() => setAbriModalFormularioProjeto(true)} type="submit" className=" font-worksans bg-white text-[17px] text-nowrap rounded-lg flex gap-1 px-4 py-[9px] shadow-md hover:border border-[#399ED7] mb-2">
                     Adicionar projeto
                     <Plus size={24} className=" py-[3px] ml-2" />
                 </button>
