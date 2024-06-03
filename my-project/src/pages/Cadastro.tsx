@@ -19,46 +19,47 @@ export default function Cadastro() {
 
     const [error, setError] = useState('');
 
-    function verificaCaoFormulario() {
-        if (userForm.nome.length < 3) {
-            setError('Por favor, verifique o nome.')
-            return
-        }
-        if (userForm.email.length < 3) {
-            setError('Por favor, verifique o email.')
-            return
-        }
-        if (userForm.senha.length < 8) {
-            setError('Sua senha deve conter no mínimo 8 caracteres.')
-            return
-        }
-        if (!userForm.termo) {
-            setError('Por favor, aceite os termos.')
-            return
-        }       
-        setError('') 
-        return error === '' ? true : false;
+function verificaCaoFormulario(): boolean {
+    if (userForm.nome.length < 3) {
+        setError('Por favor, verifique o nome.');
+        return false;
     }
+    if (userForm.email.length < 3) {
+        setError('Por favor, verifique o email.');
+        return false;
+    }
+    if (userForm.senha.length < 8) {
+        setError('Sua senha deve conter no mínimo 8 caracteres.');
+        return false;
+    }
+    if (!userForm.termo) {
+        setError('Por favor, aceite os termos.');
+        return false;
+    }
+    setError('');
+    return true;
+}
+
     
     async function cadastrarUsuario(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const isFormValid = await verificaCaoFormulario();
+        const isFormValid = verificaCaoFormulario();
         if (isFormValid) {
-            api.post('/create', userForm)
-                .then(response => {
-                    console.log('Usuário cadastrado com sucesso:', response.data);
-                    setUserForm({
-                        nome: '',
-                        email: '',
-                        senha: '',
-                        termo: false
-                    });
-                    setError('');
-                    window.location.href = '/login'
-                })
-                .catch(error => {
-                    console.error('Erro ao cadastrar usuário:', error);
+            try {
+                const response = await api.post('/create', userForm);
+                console.log('Usuário cadastrado com sucesso:', response.data);
+                setUserForm({
+                    nome: '',
+                    email: '',
+                    senha: '',
+                    termo: false
                 });
+                setError('');
+                window.location.href = '/login';
+            } catch (error) {
+                console.error('Erro ao cadastrar usuário:', error);
+                setError('Erro ao cadastrar usuário. Tente novamente.');
+            }
         }
     }
 

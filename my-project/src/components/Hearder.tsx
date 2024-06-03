@@ -1,16 +1,20 @@
 import { MagnifyingGlass, Bell, CaretDown, SignOut, CaretUp, Alien } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Perfil from "./modal/Perfil";
 import Seach from "../../img/Search 03.png"
+import api from "../service/api"; 
 
 const Hearder = () => {
   const localStore = localStorage.getItem('userData');
   const { token } = JSON.parse(localStore ? localStore : '{}');
   const user = token.nome || 'Usuário';
-  const img = token.url_perfil_img || 'default-profile-image-url';
+  const img = token.url_perfil_img || 'default-profile-image-url';  
 
   const [userConfig, setUserConfig] = useState(false);
   const [perfilModal, setPerfilModal] = useState(false);
+
+
+
 
   return (
     <header className="h-fit flex flex-col p-2">
