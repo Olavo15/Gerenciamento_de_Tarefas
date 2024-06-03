@@ -8,6 +8,40 @@ class TabelaModal extends Model {
 
     protected $table = 'tabela_tarefa';
 
+    public function tabelaUpdate($id, $titulo, $cor){
+        $tabela = TabelaModal::where('id', $id)->get();
+
+        if(!$tabela){
+            http_response_code(404);
+            return ['error' => 'Erro ao criar tarefa'];
+        }
+
+        $update = new TabelaModal();
+        $update->titulo = $titulo;
+        $update->cor = $cor;
+
+        if ($update->save()) {
+            return ['success' => 'Tabela atualizada!']; 
+        } else {
+            return ['error' => 'Erro ao atualizar'];
+        }
+
+    }
+
+    public function tabelaDelete($id) {
+        $tarefa = TabelaModal::find($id);
+    
+        if (!$tarefa) {
+            return ['error' => 'Tarefa não encontrada'];
+        }
+    
+        if ($tarefa->delete()) {
+            return ['success' => 'Tarefa excluída com sucesso'];
+        } else {
+            return ['error' => 'Erro ao excluir tarefa'];
+        }
+    }
+
     public function create($titulo, $id_projeto,$cor) {
         $tarefa = new TabelaModal();
         $tarefa->titulo = $titulo;

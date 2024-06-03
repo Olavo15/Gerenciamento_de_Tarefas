@@ -45,4 +45,42 @@ class TabelaController extends Tabela {
     }
 
 
+    public function update(){
+        $body = json_decode(file_get_contents('php://input'), true);
+        if(!isset($body['titulo']) || !isset($body['cor']) || !isset($body['id'])) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Por favor, informe todos os campos corretamente!']);
+            return;
+        }
+
+
+        parent::setTitulo($body['titulo']);
+        parent::setCor($body['cor']);
+
+
+        $modal = new TabelaModal();
+        $result = $modal->tabelaUpdate($body['id'], $this->titulo, $this->cor);
+
+        if (isset($result['success'])) {
+            http_response_code(200);
+            echo json_encode(['success' => $result['success']]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => $result['error']]);
+        }
+    }
+
+    public function delete($id) {
+        $modal = new TabelaModal();
+        $result = $modal->tabelaDelete($id);
+
+        if (isset($result['success'])) {
+            http_response_code(200);
+            echo json_encode(['success' => $result['success']]);
+        } else {
+            http_response_code(500);
+            echo json_encode(['error' => $result['error']]);
+        }
+    }
+
 }
