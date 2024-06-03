@@ -38,10 +38,15 @@ mais eficiente do tempo e dos recursos disponíveis, melhorando a colaboração 
 ## Autores
 
 ** Álysson Davi dos Santos de Caldas ** e-mail: alyssondavi@aluno.unifapce.edu.br
-** Aristóteles Alves de Oliveira ** e-mail: aristotelesneto@aluno.unifapce.edu.br 
+
+** Aristóteles Alves de Oliveira ** e-mail: aristotelesneto@aluno.unifapce.edu.br
+
 ** Geovana Íviny Santos Lima ** e-mail: 
+
 ** Olavo Pereira Regis ** e-mail: olavo@aluno.unifapce.edu.br 
+
 ** Pedro Henrique Lopes da Silva ** e-mail: pedrohenriquelopes18@aluno.unifapce.edu.br
+
 ** Pedro Lucas Araújo Pinho Pierre ** e-mail: pedrolucaspierre@aluno.unifapce.edu.br  
 
 
