@@ -70,9 +70,9 @@ class TabelaController extends Tabela {
         }
     }
 
-    public function delete($id) {
+    public function deleteTabela($id) {
         $modal = new TabelaModal();
-        $result = $modal->tabelaDelete($id);
+        $result = $modal->tabelaDelete($id[0]);
 
         if (isset($result['success'])) {
             http_response_code(200);

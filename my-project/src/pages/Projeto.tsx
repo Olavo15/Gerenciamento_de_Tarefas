@@ -54,7 +54,7 @@ export function Projeto() {
     useEffect(() => {
         api.get(`/tabelas/${id}`).then(response => setTabelasTarefas(response.data.success))
         api.get(`/equipeprojeto/${id}`).then(response => setMembros(response.data.success))
-    }, [modalAdicionarUsuario, modalAdicionarTabela, modalAdicionarTabela, modalFormularioTarefa, draggedTask, originColumnId])
+    }, [modalAdicionarUsuario, modalAdicionarTabela, modalAdicionarTabela,closeModalConfigTabela, modalFormularioTarefa, draggedTask, originColumnId, idTabela])
 
     function novaTarefa(id_tabela: number){
         setIdTabela(id_tabela)
@@ -88,10 +88,19 @@ export function Projeto() {
     }
 
 
-    function deletarTabela(id_tabela: number){
-        api.delete(`/tabela/${id_tabela}`).then(() => {
-            setTabelasTarefas(tabelasTarefas.filter(tabela => tabela.id !== id_tabela));
-        }).catch(error => console.log(error));
+    function deletarTabela(idTabala: number) {
+        api.post(`/tabela/delete/${idTabala}`, {
+            id: id
+        },).then(response => {
+
+            console.log("Entry deleted successfully:", response.data);
+            setCloseModalConfigTabela({...closeModalConfigTabela, table_id: 0});
+
+        })
+        .catch(error => {
+        
+            console.error("Error deleting entry:", error);
+        });
     }
 
     return (
@@ -178,17 +187,17 @@ export function Projeto() {
                                     <div key={tabela.id} className="w-60 h-full" onDragOver={(e) => handleDragOver(e, tabela.id)}
                                     onDrop={() => handleDrop(tabela.id)}>
 
-                                        <div className={`px-2 mt-3 py-2 flex gap-5 w-full justify-between ${tabela.cor} rounded-md`}>
+                                        <div className={`px-2 relative z-0 mt-3 py-2 flex gap-5 w-full justify-between ${tabela.cor} rounded-md`}>
                                             {
                                                 closeModalConfigTabela.table_id == tabela.id ? (
                                                     <div className="px-2 py-1 shadow-lg bg-white rounded-md flex flex-col absolute left-3 gap-1 w-fit">
-                                                        <button className="text-left group flex border-b-2 border-white hover:border-zinc-400 items-center gap-1">
+                                                        <button className="text-left relative group left-0 flex border-b-2 border-white hover:border-zinc-400 items-center gap-1">
                                                             <div className="group-hover:text-yellow-500">
                                                                 <Pencil/>
                                                             </div>
                                                             Editar
                                                         </button>
-                                                        <button onClick={() => deletarTabela(tabela.id)} className="text-left group border-b-2 border-white hover:border-zinc-400 flex items-center gap-1">
+                                                         <button onClick={() => deletarTabela(tabela.id)} className="text-left group border-b-2 border-white hover:border-zinc-400 flex items-center gap-1">
                                                             <div className="group-hover:text-red-500">
                                                                 <Trash/>
                                                             </div>

@@ -12,13 +12,14 @@ export default function Perfil(props: Iprops){
     const {token} = JSON.parse(localStore ? localStore : '')
     const user: string = token.nome
     const img = token.url_perfil_img
+    console.log(token)
   
 
   const [configImg, setConfigImg] = useState(false)
 
   return (
     <div className="flex items-center justify-center w-screen h-screen absolute bg-zinc-800 bg-opacity-25 top-0 left-0 backdrop-blur-sm z-50">
-      <div className="p-2 bg-zinc-100 relative flex flex-col w-fit rounded-lg drop-shadow-md">
+      <div className="p-3 bg-zinc-100 relative flex flex-col w-fit rounded-lg drop-shadow-md">
         <button onClick={props.closeModal} className="absolute right-4 top-4 p-2 bg-white rounded-full bg-opacity-90">
             <X/>
         </button>
@@ -48,10 +49,10 @@ export default function Perfil(props: Iprops){
             ):(
                 <>
                     <h1 className="text-xl font-bold">
-                        Aristóteles Alves
+                        {user}
                     </h1>
                     <p>
-                        arystotelys@gmail.com
+                        analidia@orkut.com
                     </p>
                 </>
             )}

@@ -21,16 +21,8 @@ const Hearder = () => {
       {perfilModal ? <Perfil closeModal={() => setPerfilModal(!perfilModal)} /> : null}
       <div className="w-full h-14 bg-white border-b-[#007AC0] shadow-lg rounded-md border border-zinc-100 flex items-center justify-between px-4 py-2">
         <div className="">
-          <h1 className="text-4xl font-semibold text-[#007AC0] font-sans">GC</h1>
+          <a href="/" className="text-4xl font-semibold text-[#007AC0] font-sans">GC </a> 
         </div>
-
-        <div className="flex space-x-2 items-center mr-[250px]">
-                    <input type="text" className="bg-[#FFFCFC] border border-[#b0b0b0] rounded w-[400px] px-4 h-11 text-[#757575] hover:border-[#007AC0] focus:border-[#007AC0] focus:outline-none font-worksans" placeholder="Pesquisar.."/>
-
-                    <button className="bg-[#007ac0b5] w-[74px] h-10 rounded-md">
-                        <figure> <img className="h-[20px] px-[24px]" src={Seach}/></figure>
-                    </button>
-                </div>
 
         <div className="flex items-center gap-4 relative">
           <p className="text-xl font-semibold uppercase">

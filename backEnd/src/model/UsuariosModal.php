@@ -42,6 +42,7 @@ class UsuariosModal extends Model {
                 'exp' => time() + 3600,
                 'id_usuario' => $usuario->id,
                 'nome' => $usuario->nome,
+                'email' => $usuario->$email,
                 'url_perfil_img' => $usuario->url_perfil_img
             ];
             $secret_key = '244_NAO_E_CRIME'; 

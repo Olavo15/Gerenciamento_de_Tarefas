@@ -29,13 +29,13 @@ class TabelaModal extends Model {
     }
 
     public function tabelaDelete($id) {
-        $tarefa = TabelaModal::find($id);
-    
-        if (!$tarefa) {
+        $tabela = TabelaModal::where('id', $id)->first();
+        
+        if (!$tabela) {
             return ['error' => 'Tarefa não encontrada'];
         }
     
-        if ($tarefa->delete()) {
+        if ($tabela->delete()) {
             return ['success' => 'Tarefa excluída com sucesso'];
         } else {
             return ['error' => 'Erro ao excluir tarefa'];
