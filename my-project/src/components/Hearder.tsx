@@ -14,16 +14,16 @@ const Hearder = () => {
   return (
     <header className="h-fit flex flex-col p-2">
       {perfilModal ? <Perfil closeModal={() => setPerfilModal(!perfilModal)} /> : null}
-      <div className="w-full h-14 bg-white shadow-lg rounded-md border border-zinc-100 flex items-center justify-between px-4 py-2">
+      <div className="w-full h-14 bg-white border-b-[#007AC0] shadow-lg rounded-md border border-zinc-100 flex items-center justify-between px-4 py-2">
         <div className="">
-          <h1 className="text-4xl font-semibold">GC</h1>
+          <h1 className="text-4xl font-semibold text-[#007AC0] font-sans">GC</h1>
         </div>
 
-        <div className="flex items-center gap-2 relative">
+        <div className="flex items-center gap-4 relative">
           <p className="text-xl font-semibold uppercase">
             {user}
           </p>
-          <img className="w-10 h-10 rounded-full" src={img} alt="" />
+          <img className="w-13 h-12 rounded-full" src={img} alt="" />
           <button onClick={() => setUserConfig(!userConfig)}>
             {userConfig ? <CaretUp size={20} /> : <CaretDown size={20} />}
           </button>

@@ -40,19 +40,19 @@ export default function Projetos() {
         <div>
             {abriModalFormularioProjeto ? <FormularioProjeto closeModal={() => setAbriModalFormularioProjeto(false)} /> : null}
 
-            <div className="flex justify-between items-center">
-                <h1 className='pb-2 font-semibold text-2xl'>
-                    Lista de projetos
+            <div className="flex justify-between items-center mt-12">
+                <h1 className='pb-2 font-semibold text-3xl font-worksans text-[#232323]'>
+                    Lista de Projetos
                 </h1>
-                <button onClick={() => setAbriModalFormularioProjeto(true)} type="submit" className="bg-white rounded-md flex gap-1 px-2 py-1 shadow-md">
+                <button onClick={() => setAbriModalFormularioProjeto(true)} type="submit" className=" font-worksans bg-white text-[17px] text-nowrap rounded-lg flex gap-1 px-4 py-[9px] shadow-md hover:border border-[#399ED7] mb-8">
                     Adicionar projeto
-                    <Plus size={24} className="ml-2" />
+                    <Plus size={24} className=" py-[3px] ml-2" />
                 </button>
             </div>
-            <div className="flex mt-4 flex-col gap-2">
+            <div className="flex mt-12 flex-col gap-2">
                 <div>
-                    <h2 className='pb-2 font-semibold text-xl'>Meus projetos:</h2>
-                    <div className='flex gap-2 flex-wrap'>
+                    <h2 className='pb-2 font-semibold text-xl border-b border-gray-400 mt-2 w-full'>Meus projetos:</h2>
+                    <div className='flex gap-2 flex-wrap mt-6'>
                         {projetosUsuario.map(projeto => (
                             <a href={`/projeto/${projeto.id}`} key={projeto.id} className='p-2 bg-white rounded-md shadow-md w-72 border-l-[4px] border-purple-400 hover:shadow-xl'>
                                 <div className='flex gap-1 items-center justify-between'>
@@ -74,8 +74,8 @@ export default function Projetos() {
                         ))}
                     </div>
                 </div>
-                <div>
-                    <h2 className='pb-2 font-semibold text-xl'>Projetos que está Participando:</h2>
+                <div className='mt-12'>
+                    <h2 className='pb-2 font-semibold text-xl border-b border-gray-400 mt-2 w-full'>Projetos que está Participando:</h2>
                     <div className='flex gap-2 flex-wrap'>
                         {projetosParticipando.map(projeto => (
                             <a href={`/projeto/${projeto.id_projeto}`} key={projeto.id} className='p-2 bg-white rounded-md shadow-md w-72 border-l-[4px] border-blue-400'>
