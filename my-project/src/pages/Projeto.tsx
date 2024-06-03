@@ -8,6 +8,7 @@ import api from "../service/api";
 import { FormularioTarefaModal } from "../components/modal/FormularioTarefaModal";
 
 
+
 interface Imembros {
     id: number
     nome: string
@@ -134,13 +135,15 @@ export function Projeto() {
                     {
                         !pagEquipe ? (
                             <button onClick={() => setModalAdicionarUsuario(!modalAdicionarUsuario
-                            )} className="px-4 py-2 rounded-md bg-white shadow-md hover:bg-opacity-40 active:bg-opacity-00">
+                            )} className="font-worksans bg-white text-[17px] text-nowrap rounded-lg flex gap-1 px-4 py-[9px] shadow-md hover:border border-[#399ED7] mb-2">
                                 Adicionar membro
+                                <Plus size={24} className=" py-[3px] ml-2" />
                             </button>
                         ) : (
                             <button onClick={() => setModalAdicionarTabela(!modalAdicionarTabela
                             )} className=" bg-white font-worksans text-[17px] text-nowrap rounded-lg flex gap-1 px-6 py-[9px] shadow-md hover:border border-[#399ED7] mb-4">
                                 Criar tabela
+                                <Plus size={24} className=" py-[3px] ml-2" />   
                             </button>
                         )
                     }
