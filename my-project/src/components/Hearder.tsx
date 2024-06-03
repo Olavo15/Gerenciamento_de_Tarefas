@@ -1,6 +1,7 @@
 import { MagnifyingGlass, Bell, CaretDown, SignOut, CaretUp, Alien } from "@phosphor-icons/react";
 import { useState } from "react";
 import Perfil from "./modal/Perfil";
+import Seach from "../../img/Search 03.png"
 
 const Hearder = () => {
   const localStore = localStorage.getItem('userData');
@@ -18,6 +19,14 @@ const Hearder = () => {
         <div className="">
           <h1 className="text-4xl font-semibold text-[#007AC0] font-sans">GC</h1>
         </div>
+
+        <div className="flex space-x-2 items-center mr-[250px]">
+                    <input type="text" className="bg-[#FFFCFC] border border-[#b0b0b0] rounded w-[400px] px-4 h-11 text-[#757575] hover:border-[#007AC0] focus:border-[#007AC0] focus:outline-none font-worksans" placeholder="Pesquisar.."/>
+
+                    <button className="bg-[#007ac0b5] w-[74px] h-10 rounded-md">
+                        <figure> <img className="h-[20px] px-[24px]" src={Seach}/></figure>
+                    </button>
+                </div>
 
         <div className="flex items-center gap-4 relative">
           <p className="text-xl font-semibold uppercase">

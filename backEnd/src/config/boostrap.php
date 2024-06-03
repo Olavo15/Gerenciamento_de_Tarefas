@@ -17,16 +17,16 @@ $capsule = new Capsule;
 //     'prefix' => '',
 // ]);
 
-$capsule->addConnection([
-    'driver' => 'mysql',
-    'host' => 'localhost',
-    'database' => 'GDT',
-    'username' => 'olavo',
-    'password' => 'QnE8UA',
-    'charset' => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix' => '',
-]);
+// $capsule->addConnection([
+//     'driver' => 'mysql',
+//     'host' => 'localhost',
+//     'database' => 'GDT',
+//     'username' => 'olavo',
+//     'password' => 'QnE8UA',
+//     'charset' => 'utf8',
+//     'collation' => 'utf8_unicode_ci',
+//     'prefix' => '',
+// ]);
 
 // depois de configurar procura um arquivo chamado UpMigration.php ele vai ta na raiz fora do src!!
 
@@ -41,16 +41,16 @@ $capsule->addConnection([
 //     'prefix' => '',
 // ]);
 
-// $capsule->addConnection([
-//     'driver' => 'mysql',
-//     'host' => 'localhost',
-//     'database' => 'sea',
-//     'username' => 'root',
-//     'password' => '',
-//     'charset' => 'utf8',
-//     'collation' => 'utf8_unicode_ci',
-//     'prefix' => '',
-// ]);
+$capsule->addConnection([
+    'driver' => 'mysql',
+    'host' => 'localhost',
+    'database' => 'sea',
+    'username' => 'root',
+    'password' => '',
+    'charset' => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix' => '',
+]);
 
 
 $capsule->setAsGlobal();

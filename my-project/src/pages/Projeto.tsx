@@ -87,8 +87,10 @@ export function Projeto() {
     }
 
 
-    function deletarTabela(){
-
+    function deletarTabela(id_tabela: number){
+        api.delete(`/tabela/${id_tabela}`).then(() => {
+            setTabelasTarefas(tabelasTarefas.filter(tabela => tabela.id !== id_tabela));
+        }).catch(error => console.log(error));
     }
 
     return (
@@ -173,7 +175,7 @@ export function Projeto() {
                                     <div key={tabela.id} className="w-60 h-full" onDragOver={(e) => handleDragOver(e, tabela.id)}
                                     onDrop={() => handleDrop(tabela.id)}>
 
-                                        <div className={`px-2 relative py-1 flex gap-5 w-full justify-between ${tabela.cor} rounded-md`}>
+                                        <div className={`px-2 mt-3 py-2 flex gap-5 w-full justify-between ${tabela.cor} rounded-md`}>
                                             {
                                                 closeModalConfigTabela.table_id == tabela.id ? (
                                                     <div className="px-2 py-1 shadow-lg bg-white rounded-md flex flex-col absolute left-3 gap-1 w-fit">
@@ -183,7 +185,7 @@ export function Projeto() {
                                                             </div>
                                                             Editar
                                                         </button>
-                                                        <button onClick={deletarTabela} className="text-left group border-b-2 border-white hover:border-zinc-400 flex items-center gap-1">
+                                                        <button onClick={() => deletarTabela(tabela.id)} className="text-left group border-b-2 border-white hover:border-zinc-400 flex items-center gap-1">
                                                             <div className="group-hover:text-red-500">
                                                                 <Trash/>
                                                             </div>
