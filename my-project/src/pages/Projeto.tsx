@@ -49,7 +49,11 @@ export function Projeto() {
     const [pagEquipe, setPagEquipe] = useState(true)
     const [draggedTask, setDraggedTask] = useState<ITarefas | null>(null);
     const [originColumnId, setOriginColumnId] = useState<number | null>(null);
-
+    const [modalUpdate, setModalUpdate] = useState(false);
+    const [configTabelaText, setConfigTabelaText] = useState({
+        titulo: '',
+        cor:''
+    })
 
     useEffect(() => {
         api.get(`/tabelas/${id}`).then(response => setTabelasTarefas(response.data.success))
@@ -107,7 +111,11 @@ export function Projeto() {
         <div className="flex flex-col gap-2 w-full h-full overflow-hidden">
             {
                 modalAdicionarTabela ? (
-                    <ModalInput fechar={() => setModalAdicionarTabela(!modalAdicionarTabela)} projeto_id={id ? id : ''}/>
+                    <ModalInput cor={configTabelaText.cor} titulo={configTabelaText.titulo} update={modalUpdate} id={idTabela} fechar={() => {
+                        setIdTabela(0);
+                        setModalUpdate(false);
+                        setModalAdicionarTabela(!modalAdicionarTabela);
+                    }} projeto_id={id ? id : ''}/>
                 ) : null
             }
             {/* {
@@ -191,7 +199,12 @@ export function Projeto() {
                                             {
                                                 closeModalConfigTabela.table_id == tabela.id ? (
                                                     <div className="px-2 py-1 shadow-lg bg-white rounded-md flex flex-col absolute left-3 gap-1 w-fit">
-                                                        <button className="text-left relative group left-0 flex border-b-2 border-white hover:border-zinc-400 items-center gap-1">
+                                                        <button onClick={() => {
+                                                            setConfigTabelaText({...configTabelaText, cor: tabela.cor, titulo: tabela.titulo});
+                                                            setIdTabela(tabela.id);
+                                                            setModalUpdate(!modalUpdate);
+                                                            setModalAdicionarTabela(!modalAdicionarTabela);
+                                                        }} className="text-left relative group left-0 flex border-b-2 border-white hover:border-zinc-400 items-center gap-1">
                                                             <div className="group-hover:text-yellow-500">
                                                                 <Pencil/>
                                                             </div>

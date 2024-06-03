@@ -8,19 +8,19 @@ class TabelaModal extends Model {
 
     protected $table = 'tabela_tarefa';
 
-    public function tabelaUpdate($id, $titulo, $cor){
-        $tabela = TabelaModal::where('id', $id)->get();
+    public function tabelaUpdate($id, $titulo, $cor , $id_projeto){
+        $tabela = TabelaModal::where('id', $id)->first();
 
         if(!$tabela){
             http_response_code(404);
             return ['error' => 'Erro ao criar tarefa'];
         }
 
-        $update = new TabelaModal();
-        $update->titulo = $titulo;
-        $update->cor = $cor;
+        $tabela->titulo = $titulo;
+        $tabela->id_projeto = $id_projeto;
+        $tabela->cor = $cor;
 
-        if ($update->save()) {
+        if ($tabela->save()) {
             return ['success' => 'Tabela atualizada!']; 
         } else {
             return ['error' => 'Erro ao atualizar'];

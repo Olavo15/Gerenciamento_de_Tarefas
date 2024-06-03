@@ -17,7 +17,7 @@ ModelRouter::get('/tarefas', 'tarefasController@funcao');
 
 ModelRouter::get('/tabelas/{id}', 'TabelaController@listAllTablesByProjectId');
 ModelRouter::post('/tabela', 'TabelaController@create');
-ModelRouter::post('/tabela/update', 'TabelaController@update');
+ModelRouter::post('/tabela/update', 'TabelaController@updateTabela');
 ModelRouter::post('/tabela/delete/{id}', 'TabelaController@deleteTabela');
 
 

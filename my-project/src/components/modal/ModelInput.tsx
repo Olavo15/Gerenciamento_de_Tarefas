@@ -1,11 +1,15 @@
 import { X } from "@phosphor-icons/react";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import api from "../../service/api";
 
 
 interface IModalInput{
     fechar: () => void;
     projeto_id: string;
+    update: boolean;
+    id?: number
+    titulo?: string;
+    cor?: string;
 }
 
 export default function ModalInput(props:IModalInput){
@@ -17,8 +21,38 @@ export default function ModalInput(props:IModalInput){
 
     const cores = ['bg-red-300 border border-red-400','bg-green-300 border border-green-400','bg-blue-300 border border-blue-400','bg-purple-300 border border-purple-400','bg-yellow-300 border border-yellow-400','bg-orange-300 border border-orange-400']
 
+    useEffect(() => {
+        setTitutloTabela(props.titulo? props.titulo : '')
+        setCorSelecionada(props.cor? props.cor : '')
+    }, [])
+
     function criarTabela(e: FormEvent<HTMLFormElement>){
-        e.preventDefault();     
+        e.preventDefault();  
+        
+        if(props.update){
+            console.log('update');
+            if(tituloTabela.length <= 3){
+                setError('Digite o novo titulo para atualizar!');
+                return
+            }
+            if(corSelecionado.length <= 3){
+                setError('escolha uma cor!');
+                return
+            }
+            setError('');
+            api.post('/tabela/update', {
+                titulo: tituloTabela,
+                cor: corSelecionado,
+                id: props.id,
+                id_projeto: props.projeto_id
+            })
+            props.fechar();
+            return;
+        }
+        if(corSelecionado.length <= 3){
+            setError('escolha uma cor!');
+            return
+        }
         if (tituloTabela.length > 3) {
             api.post('/tabela', {
                 titulo: tituloTabela,
@@ -35,7 +69,8 @@ export default function ModalInput(props:IModalInput){
             setError('Adicione um nome a tabela');
         }
     }
-
+    console.log(props.id);
+    console.log(props.update);
 
     return (
         <div className="flex z-50 items-center justify-center w-screen h-screen absolute bg-zinc-800 bg-opacity-25 top-0 left-0 backdrop-blur-sm">
