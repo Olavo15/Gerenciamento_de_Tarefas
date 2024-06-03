@@ -1,4 +1,4 @@
-import { DotsThree, DotsThreeVertical, PaperPlaneTilt, Plus, Rows, Trash, Users, X } from "@phosphor-icons/react";
+import { DotsThreeVertical, Pencil, Plus, Rows, Trash, Users, X } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import TarefaModal from "../components/modal/TarefaModal";
@@ -31,16 +31,21 @@ interface ITabelaTarefa {
 
 export function Projeto() {
     const { id } = useParams<{ id: string }>();
-    const [idTabela, setIdTabela] = useState(0)
 
-    const [pagEquipe, setPagEquipe] = useState(true)
     const [modalTarefa, setModalTarefa] = useState(false)
     const [modalAdicionarTabela, setModalAdicionarTabela] = useState(false)
     const [modalAdicionarUsuario, setModalAdicionarUsuario] = useState(false)
     const [modalFormularioTarefa, setModalFormularioTarefa] = useState(false)
+    const [closeModalConfigTabela, setCloseModalConfigTabela] = useState({
+        open: false,
+        table_id: 0
+    })
+
     const [tabelasTarefas, setTabelasTarefas] = useState<ITabelaTarefa[]>([])
     const [membros, setMembros] = useState<Imembros[]>([])
-
+    
+    const [idTabela, setIdTabela] = useState(0)
+    const [pagEquipe, setPagEquipe] = useState(true)
     const [draggedTask, setDraggedTask] = useState<ITarefas | null>(null);
     const [originColumnId, setOriginColumnId] = useState<number | null>(null);
 
@@ -55,13 +60,11 @@ export function Projeto() {
         setModalFormularioTarefa(!modalFormularioTarefa)
     }
 
-    // Função para iniciar o arrastar
     function handleDragStart(tarefa: ITarefas, idColunaOrigem: number) {
         setDraggedTask(tarefa);
         setOriginColumnId(idColunaOrigem);
     }
 
-    // Função para finalizar o arrastar
     function handleDrop(destinationColumnId: number) {
         if (draggedTask && originColumnId !== null && destinationColumnId !== null && originColumnId !== destinationColumnId) {
             mudarTarefaColuna(destinationColumnId, draggedTask.id);
@@ -73,14 +76,19 @@ export function Projeto() {
 
     function handleDragOver(event: React.DragEvent<HTMLDivElement>, idColunaDestino: number) {
         event.preventDefault();
+        console.log(idColunaDestino)
     }
 
-    // Função para mover a tarefa entre colunas
     function mudarTarefaColuna(idNovaColuna: number, idTarefa: number) {
         api.post('/tarefa/update', {
             id_tarefa: idTarefa,
             novo_id: idNovaColuna
         },)
+    }
+
+
+    function deletarTabela(){
+
     }
 
     return (
@@ -90,10 +98,10 @@ export function Projeto() {
                     <ModalInput fechar={() => setModalAdicionarTabela(!modalAdicionarTabela)} projeto_id={id ? id : ''}/>
                 ) : null
             }
-            {
+            {/* {
                 modalTarefa ? <TarefaModal fecharModalFunction={() => setModalTarefa(!modalTarefa)} tarefa={tarefax1} />
                     : null
-            }
+            } */}
             {
                 modalFormularioTarefa ? <FormularioTarefaModal id_projeto={Number(id)} id_tabela_tarefa={idTabela} closeModal={() => setModalFormularioTarefa(!modalFormularioTarefa)} /> 
                     : null
@@ -160,11 +168,38 @@ export function Projeto() {
                         <div className="flex gap-4 items-start ">
                         {
                             tabelasTarefas.map((tabela) => {
+
                                 return (
                                     <div key={tabela.id} className="w-60 h-full" onDragOver={(e) => handleDragOver(e, tabela.id)}
                                     onDrop={() => handleDrop(tabela.id)}>
-                                        <div className={` mt-4 px-2 shadow py-[7px] flex gap-5 w-full justify-between ${tabela.cor} rounded-md`}>
-                                            <button>
+
+                                        <div className={`px-2 relative py-1 flex gap-5 w-full justify-between ${tabela.cor} rounded-md`}>
+                                            {
+                                                closeModalConfigTabela.table_id == tabela.id ? (
+                                                    <div className="px-2 py-1 shadow-lg bg-white rounded-md flex flex-col absolute left-3 gap-1 w-fit">
+                                                        <button className="text-left group flex border-b-2 border-white hover:border-zinc-400 items-center gap-1">
+                                                            <div className="group-hover:text-yellow-500">
+                                                                <Pencil/>
+                                                            </div>
+                                                            Editar
+                                                        </button>
+                                                        <button onClick={deletarTabela} className="text-left group border-b-2 border-white hover:border-zinc-400 flex items-center gap-1">
+                                                            <div className="group-hover:text-red-500">
+                                                                <Trash/>
+                                                            </div>
+                                                            Excluir
+                                                        </button>
+                                                        <button onClick={() => setCloseModalConfigTabela({...closeModalConfigTabela, open: false, table_id: 0})}  className="text-left group border-b-2 border-white hover:border-zinc-400  flex items-center gap-1">
+                                                            <div className="group-hover:text-orange-500">
+                                                                <X/>
+                                                            </div>
+                                                            Cancelar
+                                                        </button>
+                                                    </div>
+                                                ) : null
+                                            }
+                                            
+                                            <button onClick={() => setCloseModalConfigTabela({...closeModalConfigTabela, open: true, table_id: tabela.id})} >
                                                 <DotsThreeVertical/>
                                             </button>
                                             <h1>
@@ -185,7 +220,7 @@ export function Projeto() {
                                                             <span className="text-sm text-zinc-600 break-all">{tarefa.descricao}</span>
                                                         </div>
                                                         <div className="flex ml-5 mt-2">
-                                                            {tarefa.equipe_tarefa.map((user, index) => {
+                                                            {tarefa.equipe_tarefa.map((user) => {
                                                                 return (
                                                                     <img
                                                                         key={user.id}
