@@ -6,6 +6,11 @@ O seguinte projeto foi desenvolvido para a disciplina de Projeto Integrador: Pro
 
 Necessidade solicitada por outra equipe, para que se desenvolva uma plataforma de gerenciamento de tarefas, que seja simples e intuitiva e atenda aos requisitos.
 
+## Visão Geral ##
+
+A criação de uma plataforma de gestão de tarefas visa melhorar a organização e execução de atividades. O projeto envolve o desenvolvimento, implementação e teste de uma solução que permite o registro, priorização, categorização, lembretes e compartilhamento de tarefas. 
+A plataforma busca aumentar a eficiência e produtividade de usuários individuais e equipes, oferecendo uma interface intuitiva e segurança de dados. O objetivo é facilitar o gerenciamento de tarefas e a colaboração, atendendo aos requisitos de usabilidade, desempenho e segurança, assegurando uma coordenação eficaz do desenvolvimento do sistema.
+
 ## Objetivo
 
 O objetivo do sistema é propiciar uma **Plataforma de gerenciamento de tarefas** que
@@ -41,7 +46,7 @@ mais eficiente do tempo e dos recursos disponíveis, melhorando a colaboração 
 
 ** Aristóteles Alves de Oliveira ** e-mail: aristotelesneto@aluno.unifapce.edu.br
 
-** Geovana Íviny Santos Lima ** e-mail: 
+** Geovana Íviny Santos Lima ** e-mail: geovana0@aluno.unifapce.edu.br
 
 ** Olavo Pereira Regis ** e-mail: olavo@aluno.unifapce.edu.br 
 
