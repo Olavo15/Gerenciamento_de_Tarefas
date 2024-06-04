@@ -3,17 +3,18 @@
 namespace App\Entity;
 
 class tarefa {
-    public $titulo;
-    public $descricao;
-    public $progresso;
-    //private $id_usuario;
+    protected $titulo;
+    protected $descricao;
+    protected $id_projeto;
+    protected $id_tabela_tarefa;
+
 
     public function setTitulo($titulo) {
         if(strlen($titulo) < 1 ) {
             http_response_code(400);
             echo json_encode(['error' => 'O título deve ter pelo menos 1 caractere']);
             exit;
-        } elseif (strlen($titulo) > 14) {
+        } elseif (strlen($titulo) > 25) {
             http_response_code(400);
             echo json_encode(['error' => 'O título não pode ter mais de 14 caracteres']);
             exit;
@@ -35,9 +36,13 @@ class tarefa {
         $this->descricao = $descricao;
     }
 
-    public function setProgresso($progresso){
+    public function idProjeto($id_projeto){
+        $this->id_projeto = $id_projeto;
+    }
+
+    public function idTabelaTarefa($id_tabela_tarefa){
         
-        $this->progresso = $progresso;
+        $this->id_tabela_tarefa = $id_tabela_tarefa;
     }
 
 }

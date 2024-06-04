@@ -1,98 +1,104 @@
-import React, { useState } from 'react';
-import { Plus, UsersThree, DotsThreeVertical } from "@phosphor-icons/react";
+import { useEffect, useState } from 'react';
+import { Plus } from "@phosphor-icons/react";
+import FormularioProjeto from '../components/modal/FormularioProjeto';
+import api from '../service/api';
+
+interface IProjeto {
+    id: number;
+    titulo: string;
+    descricao: string;
+    id_usuario: number;
+    created_at: string;
+    id_projeto?: number;
+}
 
 export default function Projetos() {
-    // Inicializando uma lista de projetos com useState
-    const [projects, setProjects] = useState([
-        { id: 1, name: "PHP", description: "Fazer uma aplicação de back com front", imageUrl: "https://c4.wallpaperflare.com/wallpaper/936/167/698/anime-one-piece-monkey-d-luffy-shanks-one-piece-wallpaper-preview.jpg" },
-        { id: 2, name: "BD", description: "Fazer um video", imageUrl: "https://img.goodfon.com/wallpaper/nbig/4/ad/one-piece-luffy-shanks.webp" },
-        { id: 3, name: "Pi", description: "Bla Bla Bla Bla Bla Bla", imageUrl: "https://c4.wallpaperflare.com/wallpaper/734/824/1024/thousand-sunny-one-piece-wallpaper-preview.jpg" },
-        {id: 4, name: "oi", description: "blabla", imageUrl: "https://i.pinimg.com/564x/f7/93/ae/f793ae2c8f2bdb5aadbf5d224a3bbb45.jpg"}
-    ])
+    const [abriModalFormularioProjeto, setAbriModalFormularioProjeto] = useState(false);
+    const [projetosUsuario, setProjetosUsuario] = useState<IProjeto[]>([]);
+    const [projetosParticipando, setProjetosParticipando] = useState<IProjeto[]>([]);
 
-    // Para controlar se o menu está aberto ou fechado
-const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-// Para armazenar o projeto selecionado
-const [selectedProject, setSelectedProject] = useState(null);
+    const localStore = localStorage.getItem('userData')
+    const {token} = JSON.parse(localStore ? localStore : '')
+    const id: number = token.id_usuario
 
-// Alternar entre abrir e fechar o menu e selecionar um projeto
-const toggleMenu = (project) => {
-    setIsMenuOpen(!isMenuOpen);
-    setSelectedProject(project);
-}
-
-// Renomear o projeto selecionado
-const handleRename = () => {
-    const newName = prompt("Digite o novo nome do projeto:");
-    if (newName !== null && newName.trim() !== "") {
-        const updatedProjects = projects.map(project =>
-            project.id === selectedProject.id ? { ...project, name: newName } : project
-        );
-        setProjects(updatedProjects);
+    function carregarApi() {
+        api.get(`/projetos/${id}`)
+            .then(response => {
+                const { projetosUsuario, projetosParticipando } = response.data.success;
+                setProjetosUsuario(projetosUsuario);
+                setProjetosParticipando(projetosParticipando);
+            })
+            .catch(error => console.error(error))
     }
-}
 
-// Para ocultar o projeto selecionado
-const handleHide = () => {
-    const updatedProjects = projects.filter(project => project.id !== selectedProject.id);
-    setProjects(updatedProjects);
-}
-
-// Para sair do projeto selecionado
-const handleExit = () => {
-    const confirmExit = window.confirm(`Tem certeza de que deseja sair do projeto "${selectedProject.name}"?`);
-    if (confirmExit) {
-        const updatedProjects = projects.filter(project => project.id !== selectedProject.id);
-        setProjects(updatedProjects);
-        setIsMenuOpen(false);
-    }
-}
-
+    useEffect(() => {
+        carregarApi();
+    }, [abriModalFormularioProjeto]);
 
     return (
-        <>
-            <div className="flex justify-between px-2 py-10">
-                <h1 className="text-3xl">Projetos</h1>
-                <button type="submit" className="bg-slate-200 px-1 py-1 rounded-2xl text-sm flex items-center border border-black hover:bg-blue-600">
+        <div>
+            {abriModalFormularioProjeto ? <FormularioProjeto closeModal={() => setAbriModalFormularioProjeto(false)} /> : null}
+
+            <div className="flex justify-between items-center mt-8">
+                <h1 className='pb-2 font-semibold text-3xl font-worksans text-[#232323]'>
+                    Lista de Projetos
+                </h1>
+                <button onClick={() => setAbriModalFormularioProjeto(true)} type="submit" className=" font-worksans bg-white text-[17px] text-nowrap rounded-lg flex gap-1 px-4 py-[9px] shadow-md hover:border border-[#399ED7] mb-2">
                     Adicionar projeto
-                    <Plus size={24} className="ml-2" />
+                    <Plus size={24} className=" py-[3px] ml-2" />
                 </button>
             </div>
-                <div  className="flex mt-4 ">
-
-                    {projects.map(project => (
-                        <div key={project.id} className="group relative w-80 border border-zinc-600 rounded-md text-pretty overflow-hidden mr-4">
-                            <button className="absolute text-black p-1 hidden delay-300 duration-400 group-hover:block right-2 top-2 bg-white bg-opacity-50 rounded-full" onClick={() => toggleMenu(project)}>
-                                <DotsThreeVertical size={25}/>
-                            </button>
-                            {isMenuOpen && selectedProject.id === project.id && (
-                                <div className="absolute right-0 mt-8 w-48 bg-white border border-gray-300 rounded-md shadow-md">
-                                    <button className="block w-full px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={handleRename}>Renomear</button>
-                                    <button className="block w-full px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={handleHide}>Ocultar</button>
-                                    <button className="block w-full px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={handleExit}>Sair</button>
+            <div className="flex mt-12 flex-col gap-2">
+                <div>
+                    <h2 className='pb-2 font-semibold text-xl border-b border-gray-400 mt-2 w-full'>Meus projetos:</h2>
+                    <div className='flex gap-2 flex-wrap mt-6'>
+                        {projetosUsuario.map(projeto => (
+                            <a href={`/projeto/${projeto.id}`} key={projeto.id} className='p-2 bg-white rounded-md shadow-md w-72 border-l-[4px] border-purple-400 hover:shadow-xl'>
+                                <div className='flex gap-1 items-center justify-between'>
+                                    <h3 className='font-bold'>{projeto.titulo}</h3>
+                                    <p className='text-sm text-zinc-700 px-1 bg-green-200 rounded-md'>
+                                    {
+                                        `
+                                        ${new Date(projeto.created_at).getDate() < 10 ? '0' + new Date(projeto.created_at).getDate() : new Date(projeto.created_at).getDate()}
+                                        /${new Date(projeto.created_at).getMonth() + 1 < 10 ? '0' + (new Date(projeto.created_at).getMonth() + 1) : new Date(projeto.created_at).getMonth() + 1}
+                                        /${new Date(projeto.created_at).getFullYear()}
+                                        `
+                                    }
+                                    </p>
                                 </div>
-                            )}
-                            <a href='/Projeto'>
-                                <figure className="md:shrink-0">
-                                    <img  src={project.imageUrl} alt="" className="w-full" />
-                                </figure>
-                                <div className="p-2 flex flex-col">
-                                    <div className="mb-4 flex items-center">
-                                        <p className="text-base text-gray-700 mr-2">{project.name}</p>
-                                        <UsersThree size={24} />
-                                    </div>
-                                    <p className="text-base text-gray-700 mb-2">{project.description}</p>
-                                    <div className="text-right">
-                                         <p className="text-base text-gray-700">27/04/2024</p>
-                                    </div>    
-                                </div>
+                                <p className='text-zinc-700'>
+                                    {projeto.descricao}
+                                </p>
                             </a>
-                        </div>
-
-                    ))}
+                        ))}
+                    </div>
                 </div>
-            
-        </>
-    )
+                <div className='mt-12'>
+                    <h2 className='pb-2 font-semibold text-xl border-b border-gray-400 mt-2 w-full'>Projetos que está Participando:</h2>
+                    <div className='flex gap-2 flex-wrap'>
+                        {projetosParticipando.map(projeto => (
+                            <a href={`/projeto/${projeto.id_projeto}`} key={projeto.id} className='p-2 bg-white rounded-md shadow-md w-72 border-l-[4px] border-blue-400'>
+                                <div className='flex gap-1 items-center justify-between'>
+                                    <h3 className='font-bold'>{projeto.titulo}</h3>
+                                    <p className='text-sm text-zinc-700 px-1 bg-green-200 rounded-md'>
+                                    {
+                                        `
+                                        ${new Date(projeto.created_at).getDate() < 10 ? '0' + new Date(projeto.created_at).getDate() : new Date(projeto.created_at).getDate()}
+                                        /${new Date(projeto.created_at).getMonth() + 1 < 10 ? '0' + (new Date(projeto.created_at).getMonth() + 1) : new Date(projeto.created_at).getMonth() + 1}
+                                        /${new Date(projeto.created_at).getFullYear()}
+                                        `
+                                    }
+                                    </p>
+                                </div>
+                                <p className='text-zinc-700'>
+                                    {projeto.descricao}
+                                </p>
+                            </a>
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
 }

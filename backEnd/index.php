@@ -1,32 +1,34 @@
 <?php 
 
 if (isset($_SERVER['HTTP_ORIGIN'])) {
-    // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
-    // you want to allow, and if so:
+    // Decide se a origem em $_SERVER['HTTP_ORIGIN'] é uma que você deseja permitir
+    // Se sim, permita o acesso definindo o cabeçalho Access-Control-Allow-Origin
     header("Access-Control-Allow-Origin: {$_SERVER['HTTP_ORIGIN']}");
     header('Access-Control-Allow-Credentials: true');
-    header('Access-Control-Max-Age: 86400');    // cache for 1 day
+    header('Access-Control-Max-Age: 86400');    // cache por 1 dia
 }
 
-// Access-Control headers are received during OPTIONS requests
+// Os cabeçalhos Access-Control são recebidos durante as solicitações OPTIONS
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    
-    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']))
-        // may also be using PUT, PATCH, HEAD etc
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
-    
-    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']))
+    // Define os métodos HTTP que você deseja permitir
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'])) {
+        header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE , OPTIONS");
+    }
+    // Define os cabeçalhos HTTP que você deseja permitir
+    if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS'])) {
         header("Access-Control-Allow-Headers: {$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_HEADERS']}");
-
+    }
+    // Termina a execução do script
     exit(0);
-
 }
 
 require_once __DIR__."/vendor/autoload.php";
 require_once __DIR__."/src/Router/main.php";
+require_once __DIR__. '/src/config/boostrap.php';
 
 use App\Router\ModelRouter;
 use App\Core\Core;
+
 
 Core::dispatch(ModelRouter::routes());
 

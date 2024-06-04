@@ -5,7 +5,7 @@ namespace App\Entity;
 class projeto {
     public $titulo;
     public $descricao;
-    // private $id_usuario;
+    protected $id_usuario;
     protected $id;
 
     public function setTitulo($titulo) {
@@ -33,6 +33,10 @@ class projeto {
             exit;
         }
         $this->descricao = $descricao;
+    }
+
+    public function setIdUsuario($id_usuario){
+        $this->id_usuario = $id_usuario;
     }
 
     public function setId($id){

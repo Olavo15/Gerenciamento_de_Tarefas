@@ -1,65 +1,50 @@
 <?php
 
 namespace App\model;
-use App\db\conexao;
-use App\Entity\projeto;
 
-class projetoModel{
-    protected static $conexao;
+use Illuminate\Database\Eloquent\Model;
 
-    public function __construct(){
-        self::$conexao = \App\db\conexao::getConexao();
-    }
+class ProjetoModel extends Model{
+    protected $table = 'projeto';
 
-    public function create($titulo, $descricao) {
-
-        $sql = "INSERT INTO projeto (titulo, descricao) VALUES (?, ?)";
-        $stmt = self::$conexao->prepare($sql);
-        $stmt->bind_param("ss", $titulo, $descricao);
+    public function create($titulo, $descricao, $id_usuario){
+        $projeto = new ProjetoModel();
+        $projeto->titulo = $titulo;
+        $projeto->descricao = $descricao;
+        $projeto->id_usuario = $id_usuario;
         
-        if ($stmt->execute()) {
+        if ($projeto->save()) {
             return ['success' => 'Projeto criado com sucesso'];
         } else {
             return ['error' => 'Erro ao criar projeto'];
         }
     }
-    public function listUserById($id) {
 
-        $sql = "SELECT PJ.id, PJ.titulo, PJ.descricao, PJ.id_usuario as dono, EQ.id_projeto as pjTime
-        FROM projeto AS PJ
-        JOIN equipe_projeto AS EQ ON PJ.id_usuario = EQ.id_usuario
-        WHERE PJ.id_usuario = ?;
-        ";
-        $stmt = self::$conexao->prepare($sql);
-        $stmt->bind_param("s", $id);
-        $stmt->execute();
-        $resultProjetos = $stmt->get_result();
+    public function listUserById($id){
+        $projetosDoUsuario = ProjetoModel::where('id_usuario', $id)->get();
     
-        if ($resultProjetos->num_rows == 0) {
-            $dados = $resultProjetos->fetch_all(MYSQLI_ASSOC);
-            return ['success' => 'Projeto criado com sucesso','dados',];
+        $projetosParticipantes = ProjetoModel::join('equipe_projeto', 'projeto.id', '=', 'equipe_projeto.id_projeto')
+                                            ->where('equipe_projeto.id_usuario', $id)
+                                            ->get();
+    
+        // Combina os resultados
+        $todosOsProjetos = $projetosDoUsuario->merge($projetosParticipantes);
+    
+        if ($todosOsProjetos->isEmpty()) {
+            return ['error' => 'Nenhum projeto encontrado'];
         } else {
-            return ['error' => 'Nenhum projeto encontrado!'];
+            return ['success' => 'Projetos encontrados', 'projetosUsuario' => $projetosDoUsuario , 'projetosParticipando' => $projetosParticipantes];
         }
     }
-    public function deletarProjetoPorId($id) {
-    
-        $sql = "DELETE FROM projeto WHERE id = ?;";
-       
-        $stmt = self::$conexao->prepare($sql);
-        if ($stmt === false) {
-            return ['error' => 'Falha ao preparar a declaração.'];
-        }
-        
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-    
-        if ($stmt->affected_rows > 0) {
-            return ['success' => 'Projeto deletado com sucesso.'];
+
+    public function deletarPorId($id){
+        $projeto = ProjetoModel::find($id);
+
+        if ($projeto) {
+            $projeto->delete();
+            return ['success' => 'Projeto deletado com sucesso'];
         } else {
-            return ['error' => 'Nenhum projeto encontrado com esse ID.'];
+            return ['error' => 'Nenhum projeto encontrado com esse ID'];
         }
-    
-    }    
+    }
 }
-?>

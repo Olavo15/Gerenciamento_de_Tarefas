@@ -3,10 +3,8 @@
 namespace App\Entity;
 
 class equipeProjeto {
-    public $id_usuario;
-    public $id_projeto;
-    
-    //protected $id_usuario;
+    protected $id_usuario;
+    protected $id_projeto;
 
     public function setId_usuario($id_usuario){
 

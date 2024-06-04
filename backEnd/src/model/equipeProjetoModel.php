@@ -1,27 +1,37 @@
 <?php
 
 namespace App\model;
-use App\db\conexao;
 
+use Illuminate\Database\Eloquent\Model;
 
-class equipeProjetoModel{
-    protected static $conexao;
+class equipeProjetoModel extends Model
+{
+    protected $table = 'equipe_projeto';
 
-    public function __construct(){
-        self::$conexao = \App\db\conexao::getConexao();
-    }
+    public function create($id_usuario, $id_projeto)
+    {
+        $model = new equipeProjetoModel();
+        $model->id_usuario = $id_usuario;
+        $model->id_projeto = $id_projeto;
 
-    public function create($id_usuario, $id_projeto) {
-
-        $sql = "INSERT INTO equipe_projeto (id_usuario, id_projeto) VALUES (?, ?)";
-        $stmt = self::$conexao->prepare($sql);
-        $stmt->bind_param("ss", $id_usuario, $id_projeto);
-        
-        if ($stmt->execute()) {
-            return ['success' => 'Equipe criado com sucesso'];
+        if ($model->save()) {
+            return ['success' => 'Usuário adicionado!'];
         } else {
-            return ['error' => 'Erro ao criar equipe'];
+            return ['error' => 'Erro ao adicionar usuário'];
         }
     }
+
+    public function listByUserId($id_projeto)
+    {
+    $users = equipeProjetoModel::join('usuarios', 'usuarios.id', '=', 'equipe_projeto.id_usuario')
+                                ->where('id_projeto', intval($id_projeto))
+                                ->select('usuarios.id','usuarios.url_perfil_img','usuarios.nome', 'usuarios.email')
+                                ->get();
+        if ($users) {
+            return ['success' => $users];
+        } else {
+            return ['error' => 'Erro ao listar usuários'];
+        }
+    }
+    
 }
-?>

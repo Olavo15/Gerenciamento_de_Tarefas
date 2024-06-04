@@ -5,7 +5,7 @@ export default function PagNotFund(){
             <div className="flex flex-col items-center">
                 <h1 className="text-xl font-bold">404</h1>
                 <h1>OPS! NÃO ENCONTRAMOS ESSA PÁGINA</h1>
-                <a href="/" className="text-blue-400 hover:text-blue-500">
+                <a href="/login" className="text-blue-400 hover:text-blue-500">
                     Voltar para página de início
                 </a>
             </div>
