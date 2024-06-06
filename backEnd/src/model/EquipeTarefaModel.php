@@ -9,14 +9,18 @@ class equipeTarefaModel extends Model{
 
     public function create($titulo, $nome, $id_usuario, $id_tarefa){
         $tarefa = new equipeTarefaModel();
-        $sql = "INSERT INTO equipe_tarefa (titulo, nome, id_usuario, id_tarefa) VALUES (?, ?, ?, ?)";
-        $stmt = self::$conexao->prepare($sql);
-        $stmt->bind_param("ssss", $titulo, $nome, $id_usuario, $id_tarefa);
-        
-        if ($stmt->execute()) {
+        $tarefa->titulo = $titulo;
+        $tarefa->nome = $nome;
+        $tarefa->id_usuario = $id_usuario;
+        $tarefa->id_tarefa = $id_tarefa;
+        if ($tarefa->save()) {
             return ['success' => 'Equipe criado com sucesso'];
         } else {
             return ['error' => 'Erro ao criar equipe'];
         }
+    }
+
+    public function list($id){
+        $equipe = equipeTarefaModel::where('id_tarefa', $id)->get();
     }
 }

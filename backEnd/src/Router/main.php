@@ -14,6 +14,8 @@ ModelRouter::get('/projetos/{id}', 'projetoController@listByUserId');
 ModelRouter::post('/tarefa', 'tarefaController@create');
 ModelRouter::post('/tarefa/update', 'tarefaController@updateId');
 ModelRouter::get('/tarefas', 'tarefasController@funcao');
+ModelRouter::get('/tarefa/{id}', 'tarefasController@showOne');
+
 
 ModelRouter::get('/tabelas/{id}', 'TabelaController@listAllTablesByProjectId');
 ModelRouter::post('/tabela', 'TabelaController@create');

@@ -17,29 +17,29 @@ $capsule = new Capsule;
 //     'prefix' => '',
 // ]);
 
-$capsule->addConnection([
-    'driver' => 'mysql',
-    'host' => 'localhost',
-    'database' => 'GDT',
-    'username' => 'olavo',
-    'password' => 'QnE8UA',
-    'charset' => 'utf8',
-    'collation' => 'utf8_unicode_ci',
-    'prefix' => '',
-]);
-
-// depois de configurar procura um arquivo chamado UpMigration.php ele vai ta na raiz fora do src!!
-
 // $capsule->addConnection([
 //     'driver' => 'mysql',
 //     'host' => 'localhost',
-//     'database' => 'GERENCIADOR_TAREFA',
-//     'username' => 'sea',
-//     'password' => 'S!@sytem2024',
+//     'database' => 'GDT',
+//     'username' => 'olavo',
+//     'password' => 'QnE8UA',
 //     'charset' => 'utf8',
 //     'collation' => 'utf8_unicode_ci',
 //     'prefix' => '',
 // ]);
+
+// depois de configurar procura um arquivo chamado UpMigration.php ele vai ta na raiz fora do src!!
+
+$capsule->addConnection([
+    'driver' => 'mysql',
+    'host' => 'localhost',
+    'database' => 'gerenciador_tarefas',
+    'username' => 'root',
+    'password' => 'aristoteles',
+    'charset' => 'utf8',
+    'collation' => 'utf8_unicode_ci',
+    'prefix' => '',
+]);
 
 // $capsule->addConnection([
 //     'driver' => 'mysql',

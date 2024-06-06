@@ -22,6 +22,14 @@ class Tarefas extends Model {
         }
     }
 
+    public function showOne($id){
+        $tarefa = Tarefas::showOne($id);
+        if($tarefa){
+            return ['success'=> $tarefa];
+        } else {
+            return ['error' => 'Tarefa não encontrada'];
+        }
+    }
 
     public function updateId($id_tarefa, $novo_id) {
         $tarefa = Tarefas::find($id_tarefa);
@@ -39,4 +47,3 @@ class Tarefas extends Model {
         }
     }
 }
-?>

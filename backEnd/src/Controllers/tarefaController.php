@@ -32,6 +32,23 @@ class tarefaController extends tarefa {
         }
     }
 
+    public function showOne($param){
+        $id = $param[0];
+        if($id){
+            $tarefaModel = new Tarefas();
+            $result = $tarefaModel->find($id);
+            if (isset($result['success'])) {
+                http_response_code(200);
+                echo json_encode(['success' => $result['success']]);
+            } else {
+                http_response_code(500);
+                echo json_encode(['error' => $result['error']]);
+            }
+        }
+        http_response_code(500);
+        echo json_encode(['error' => 'Error no ID ']);
+    }
+
     public function updateId() {
         $body = json_decode(file_get_contents('php://input'), true);
 

@@ -32,5 +32,8 @@ class equipeTarefaController extends equipeTarefa {
             echo json_encode(['error' => $create_result['error']]);
         }
     }
+
+
+    // função para lista todos os membros da tarefa, receber id da tarefa como param
     
 }
