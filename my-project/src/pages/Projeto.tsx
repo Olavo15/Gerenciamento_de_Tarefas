@@ -33,7 +33,7 @@ interface ITabelaTarefa {
 export function Projeto() {
     const { id } = useParams<{ id: string }>();
 
-    const [modalTarefa, setModalTarefa] = useState(false)
+    const [modalTarefa, setModalTarefa] = useState(true)
     const [modalAdicionarTabela, setModalAdicionarTabela] = useState(false)
     const [modalAdicionarUsuario, setModalAdicionarUsuario] = useState(false)
     const [modalFormularioTarefa, setModalFormularioTarefa] = useState(false)
@@ -107,6 +107,11 @@ export function Projeto() {
         });
     }
 
+    function openModalTarefa(id: number){
+        setModalTarefa(!modalTarefa)
+
+    }
+
     return (
         <div className="flex flex-col gap-2 w-full h-full overflow-hidden">
             {
@@ -118,10 +123,10 @@ export function Projeto() {
                     }} projeto_id={id ? id : ''}/>
                 ) : null
             }
-            {/* {
-                modalTarefa ? <TarefaModal fecharModalFunction={() => setModalTarefa(!modalTarefa)} tarefa={tarefax1} />
+            {
+                modalTarefa ? <TarefaModal closeModal={() => setModalTarefa(!modalTarefa)} />
                     : null
-            } */}
+            }
             {
                 modalFormularioTarefa ? <FormularioTarefaModal id_projeto={Number(id)} id_tabela_tarefa={idTabela} closeModal={() => setModalFormularioTarefa(!modalFormularioTarefa)} /> 
                     : null
@@ -239,27 +244,25 @@ export function Projeto() {
                                         <div className="flex flex-col gap-2 mt-2">
                                             {tabela.tarefas.map((tarefa) => {
                                                 return (
-                                                    <div key={tarefa.id} className="bg-white p-2 rounded-md shadow-md w-full"
-                                                    draggable={true}
-                                                    onDragStart={() => handleDragStart(tarefa, tabela.id)}>
-                                                        <div className="flex flex-col gap-1">
+                                                    <button onClick={() => openModalTarefa(tarefa.id)} key={tarefa.id} className="bg-white p-2 rounded-md shadow-md w-full flex flex-col justify-start" draggable={true} onDragStart={() => handleDragStart(tarefa, tabela.id)}>
+                                                        <div className="flex flex-col gap-1 text-left ">
                                                             <h1 className="font-semibold">{tarefa.titulo}</h1>
                                                             <span className="text-sm text-zinc-600 break-all">{tarefa.descricao}</span>
                                                         </div>
                                                         <div className="flex ml-5 mt-2">
-                                                            {tarefa.equipe_tarefa.map((user) => {
+                                                            {tarefa.equipe_tarefa.map((usuario) => {
                                                                 return (
                                                                     <img
-                                                                        key={user.id}
+                                                                        key={usuario.id}
                                                                         className={`w-10 h-10 rounded-full shadow-md border-2 border-white -ml-5`}
-                                                                        src={user.url_perfil_img}
+                                                                        src={usuario.url_perfil_img}
                                                                         alt=""
                                                                     />
                                                                 );
                                                             })}
                                                         </div>
-                                                    </div>
-                                                )
+                                                    </button>
+                                                );
                                             })}
                                         </div>
                                     </div>
